@@ -1,0 +1,32 @@
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1a1a1a" media="(prefers-color-scheme: dark)">
+
+  <%
+  var title = page.title;
+  if (is_archive()) {
+    title = __('archives');
+    if (is_month()) title += ': ' + page.year + '/' + page.month;
+    else if (is_year()) title += ': ' + page.year;
+  } else if (is_category()) {
+    title = __('categories') + ': ' + page.category;
+  } else if (is_tag()) {
+    title = __('tags') + ': ' + page.tag;
+  }
+  %>
+  <title><% if (title) { %><%= title %> | <% } %><%= config.title %></title>
+
+  <%- open_graph() %>
+
+  <% if (theme.favicon) { %>
+    <%- favicon_tag(theme.favicon) %>
+  <% } %>
+
+  <%- css('css/style') %>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>

@@ -1,0 +1,61 @@
+# ===============
+# Navigation
+# ===============
+menu:
+  Home: /
+  Archives: /archives
+  # About: /about
+
+# ===============
+# Site
+# ===============
+author: Your Name
+# Footer copyright year (e.g. "2026"). Leave empty for current year.
+since:
+
+# ===============
+# Homepage Bio
+# ===============
+# Avatar image path (place in source/images/ or use URL)
+avatar:
+# Brief intro shown on homepage
+bio:
+# Email for contact icon
+email:
+
+# ===============
+# Social links
+# ===============
+social:
+  # github: https://github.com/yourname
+  # twitter: https://twitter.com/yourname
+  # bilibili: https://space.bilibili.com/yourid
+  # telegram: https://t.me/yourname
+  # weibo: https://weibo.com/yourname
+
+# ===============
+# Features
+# ===============
+search: true
+dark_mode: true
+code_copy: true
+
+# ===============
+# Pixel Mode
+# ===============
+# Author name shown in pixel mode (leave empty to keep the normal name)
+pixel_name: link
+
+# ===============
+# Comments
+# ===============
+valine:
+  enable: false
+  appId:
+  appKey:
+  placeholder: Say something...
+
+# ===============
+# Misc
+# ===============
+favicon: /favicon.ico

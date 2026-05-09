@@ -1,0 +1,24 @@
+<div class="archive-page">
+  <% var lastYear; %>
+  <% page.posts.each(function(post){ %>
+    <% var year = post.date.year(); %>
+    <% if (lastYear !== year) { %>
+      <% if (lastYear !== undefined) { %>
+        </div>
+      </section>
+      <% } %>
+      <section class="archive-section">
+        <h2 class="archive-year-label"><a href="<%- url_for(config.archive_dir + '/' + year) %>"><%= year %></a></h2>
+        <div class="archive-posts">
+      <% lastYear = year; %>
+    <% } %>
+    <div class="archive-post-item">
+      <time datetime="<%= date_xml(post.date) %>"><%= date(post.date, 'MM-DD') %></time>
+      <a href="<%- url_for(post.path) %>"><%= post.title %></a>
+    </div>
+  <% }) %>
+  <% if (page.posts.length) { %>
+    </div>
+  </section>
+  <% } %>
+</div>

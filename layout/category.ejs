@@ -1,0 +1,13 @@
+<div class="category-page">
+  <h1 class="page-title"><%= __('categories') %></h1>
+  <ul class="category-list">
+    <% site.categories.each(function(cat){ %>
+      <li class="category-item">
+        <a href="<%- url_for(cat.path) %>">
+          <%= cat.name %>
+          <span class="category-count"><%= cat.posts.length %></span>
+        </a>
+      </li>
+    <% }) %>
+  </ul>
+</div>

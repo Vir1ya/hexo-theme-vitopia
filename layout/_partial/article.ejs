@@ -1,0 +1,33 @@
+<article class="post-card h-entry<%= index ? '' : ' single' %>" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="post-card-inner">
+    <header class="post-header">
+      <% if (!index && post.cover) { %>
+        <img class="post-cover" src="<%= post.cover %>" alt="cover">
+      <% } %>
+      <%- partial('post/title') %>
+      <div class="post-meta">
+        <%- partial('post/date') %>
+        <%- partial('post/category') %>
+      </div>
+    </header>
+
+    <div class="post-body e-content" itemprop="articleBody">
+      <% if (index) { %>
+        <% if (post.excerpt) { %>
+          <%- post.excerpt %>
+        <% } else { %>
+          <p><%- strip_html(post.content).substring(0, 80) %>...</p>
+        <% } %>
+        <a class="read-more" href="<%- url_for(post.path) %>"><%= __('read_more') %> →</a>
+      <% } else { %>
+        <%- post.content %>
+      <% } %>
+    </div>
+
+    <% if (post.tags && post.tags.length) { %>
+      <footer class="post-footer">
+        <%- partial('post/tag') %>
+      </footer>
+    <% } %>
+  </div>
+</article>

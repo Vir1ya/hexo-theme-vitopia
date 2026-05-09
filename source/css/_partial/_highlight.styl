@@ -1,0 +1,173 @@
+// ===============
+// Inline Code
+// ===============
+code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+}
+
+:not(pre) > code {
+  padding: 0.15em 0.4em;
+  background: var(--color-inline-code-bg);
+  color: var(--color-inline-code-text);
+  border-radius: 3px;
+  font-weight: 500;
+}
+
+// ===============
+// Code Blocks
+// ===============
+figure.highlight {
+  position: relative;
+  margin: var(--spacing-lg) 0;
+  border-radius: var(--border-radius);
+  background: var(--color-code-bg);
+  overflow: hidden;
+  transition: background var(--transition-slow);
+
+  figcaption {
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+    border-bottom: 1px solid var(--color-border);
+
+    a {
+      color: var(--color-text-secondary);
+      float: right;
+      font-weight: 500;
+    }
+  }
+
+  table {
+    margin: 0;
+    border: none;
+    width: 100%;
+
+    td, th {
+      border: none;
+      padding: 0;
+      vertical-align: top;
+    }
+  }
+
+  .gutter {
+    width: 3.2rem;
+    text-align: right;
+    user-select: none;
+    background: rgba(0, 0, 0, 0.03);
+    border-right: 1px solid var(--color-border);
+
+    pre {
+      margin: 0;
+      padding: var(--spacing-md) 0;
+      color: var(--color-text-muted);
+      font-size: 0.85em;
+      line-height: 1.6;
+
+      .line {
+        padding: 0 var(--spacing-sm);
+      }
+    }
+  }
+
+  .code {
+    position: relative;
+
+    pre {
+      margin: 0;
+      padding: var(--spacing-md);
+      color: var(--color-code-text);
+      font-size: 0.85em;
+      line-height: 1.6;
+
+      .line {
+        padding: 0 var(--spacing-xs);
+      }
+    }
+  }
+
+  // Code block language label
+  &::before {
+    content: attr(data-lang);
+    display: none;
+  }
+}
+
+// Copy button bar
+.code-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background: rgba(0, 0, 0, 0.03);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.code-lang {
+  font-size: var(--font-size-xs);
+  font-family: var(--font-mono);
+  color: var(--color-text-muted);
+  padding-left: var(--spacing-sm);
+}
+
+.copy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  font-size: var(--font-size-xs);
+  font-family: var(--font-sans);
+  font-weight: 500;
+  color: var(--color-text-muted);
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all var(--transition);
+
+  &:hover {
+    color: var(--color-text);
+    border-color: var(--color-text-muted);
+  }
+
+  &:active {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+
+  &.copied {
+    color: #059669;
+    border-color: #059669;
+    background: rgba(5, 150, 105, 0.06);
+  }
+}
+
+// Highlight.js theme (light, warm)
+.hljs-comment,
+.hljs-quote { color: #978e7a; font-style: italic; }
+.hljs-variable,
+.hljs-template-variable,
+.hljs-attribute,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-link { color: #b55c00; }
+.hljs-number,
+.hljs-meta,
+.hljs-built_in,
+.hljs-type,
+.hljs-params { color: #006ea0; }
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet { color: #4b7a00; }
+.hljs-title,
+.hljs-section { color: #7b4fbf; }
+.hljs-keyword,
+.hljs-selector-tag { color: #c91b3b; }
+.hljs-literal { color: #b55c00; }
+.hljs-emphasis { font-style: italic; }
+.hljs-strong { font-weight: 650; }
+.hljs-deletion { color: #c91b3b; background: rgba(201, 27, 59, 0.06); }
+.hljs-addition { color: #4b7a00; background: rgba(75, 122, 0, 0.06); }

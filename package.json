@@ -1,0 +1,25 @@
+{
+  "name": "hexo-theme-vitopia",
+  "version": "1.0.0",
+  "description": "A minimalist, serif-first Hexo theme with dark mode, local search, and a Konami-code pixel art easter egg.",
+  "author": "Vir1ya",
+  "license": "GPL-3.0",
+  "homepage": "https://github.com/Vir1ya/hexo-theme-vitopia",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Vir1ya/hexo-theme-vitopia"
+  },
+  "bugs": {
+    "url": "https://github.com/Vir1ya/hexo-theme-vitopia/issues"
+  },
+  "keywords": [
+    "hexo",
+    "theme",
+    "vitopia",
+    "minimal",
+    "serif",
+    "dark-mode",
+    "pixel",
+    "konami"
+  ]
+}

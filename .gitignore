@@ -1,0 +1,6 @@
+node_modules/
+.DS_Store
+*.log
+.claude/
+source/fonts/Silver.ttf
+themes/vitopia/source/fonts/Silver.ttf

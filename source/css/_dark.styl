@@ -1,0 +1,101 @@
+// ===============
+// Dark Mode
+// ===============
+[data-theme="dark"] {
+  --color-bg: #1d1a16;
+  --color-bg-secondary: #26221d;
+  --color-text: #e8dfd3;
+  --color-text-secondary: #b5a99b;
+  --color-text-muted: #6e6456;
+  --color-border: #363028;
+  --color-link: #e0a257;
+  --color-link-hover: #f0b868;
+  --color-accent: #d9903a;
+  --color-accent-dim: rgba(217, 144, 58, 0.1);
+  --color-code-bg: #211d18;
+  --color-code-text: #d4c9b8;
+  --color-inline-code-bg: #2d2820;
+  --color-inline-code-text: #e0a257;
+  --color-header-bg: rgba(29, 26, 22, 0.9);
+  --color-shadow: rgba(0, 0, 0, 0.3);
+  --color-overlay: rgba(0, 0, 0, 0.7);
+  --color-date-accent: #d9903a;
+  --banner-gradient-start: #362818;
+  --banner-gradient-mid: #2d2218;
+  --banner-gradient-end: #1d1a16;
+}
+
+// Dark mode shadow overrides — use light shadows visible on dark bg
+[data-theme="dark"] {
+  img {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+
+    &:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
+  }
+
+  .post-card {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.04);
+
+    &:hover {
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.06);
+    }
+  }
+
+  .post-nav-prev a,
+  .post-nav-next a {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.03);
+
+    &:hover {
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.05);
+    }
+
+    &:active {
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+    }
+  }
+}
+
+// Dark mode highlight overrides
+[data-theme="dark"] {
+  .hljs-comment,
+  .hljs-quote { color: #7a7165; }
+  .hljs-variable,
+  .hljs-template-variable,
+  .hljs-attribute,
+  .hljs-tag,
+  .hljs-name,
+  .hljs-selector-id,
+  .hljs-selector-class,
+  .hljs-regexp,
+  .hljs-link { color: #f0b868; }
+  .hljs-number,
+  .hljs-meta,
+  .hljs-built_in,
+  .hljs-type,
+  .hljs-params { color: #7cc0e8; }
+  .hljs-string,
+  .hljs-symbol,
+  .hljs-bullet { color: #a8c868; }
+  .hljs-title,
+  .hljs-section { color: #c8a8f0; }
+  .hljs-keyword,
+  .hljs-selector-tag { color: #f07078; }
+  .hljs-literal { color: #f0b868; }
+  .hljs-deletion { color: #f07078; background: rgba(240, 112, 120, 0.08); }
+  .hljs-addition { color: #a8c868; background: rgba(168, 200, 104, 0.08); }
+
+  figure.highlight {
+    background: #211d18;
+
+    .gutter {
+      background: rgba(0, 0, 0, 0.2);
+      border-right-color: var(--color-border);
+    }
+  }
+
+  .code-header {
+    background: rgba(0, 0, 0, 0.2);
+  }
+}
