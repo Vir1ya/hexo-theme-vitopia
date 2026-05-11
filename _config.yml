@@ -16,7 +16,7 @@ since:
 # ===============
 # Homepage Bio
 # ===============
-# Avatar image path (place in source/images/ or use URL)
+# Avatar image path (e.g. /images/avatar.jpg, or a full URL)
 avatar:
 # Brief intro shown on homepage
 bio:
@@ -44,7 +44,7 @@ code_copy: true
 # Pixel Mode
 # ===============
 # Author name shown in pixel mode (leave empty to keep the normal name)
-pixel_name: link
+pixel_name: 
 
 # ===============
 # Comments
@@ -54,6 +54,12 @@ valine:
   appId:
   appKey:
   placeholder: Say something...
+
+# ===============
+# Announcement
+# ===============
+# Text shown below social icons on homepage. Leave empty to hide.
+announcement:
 
 # ===============
 # Misc

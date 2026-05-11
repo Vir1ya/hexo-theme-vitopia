@@ -2,22 +2,7 @@
 
 A minimalist, serif-first Hexo theme with dark mode, local search, and a Konami-code pixel art easter egg.
 
-![](https://picsum.photos/id/64/800/400)
-
-## Features
-
-- **Serif-first typography** — Times New Roman / Noto Serif SC, 18px base, generous line-height
-- **Dark mode** — CSS-variable driven, persisted in localStorage, follows system preference
-- **Local search** — pre-generated `search.json`, overlay with keyboard navigation
-- **Pixel easter egg** — press `↑↑↓↓←→←→` `b` `a` to toggle pixel-art mode
-- **Homepage banner** — radial gradient backdrop with slanted/curved bottom, pixelated staircase in pixel mode
-- **Image rows** — consecutive images auto-flow into centered flex rows, wrap on overflow
-- **Back to top** — scroll-aware button, pixel-styled in pixel mode
-- **Code blocks** — line numbers, copy button with language label, warm syntax highlighting
-- **Cover image** — per-post cover image support via front-matter
-- **i18n** — zh-CN / en
-- **Responsive** — mobile-friendly layout
-- **No jQuery** — vanilla JS only
+[中文](README_zh.md)
 
 ## Quick Start
 
@@ -63,6 +48,9 @@ social:
   bilibili: https://space.bilibili.com/yourid
   telegram: https://t.me/yourname
   weibo: https://weibo.com/yourname
+
+# Announcement (shown between banner and posts, leave empty to hide)
+announcement:
 
 # Features
 search: true          # local search

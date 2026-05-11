@@ -22,7 +22,8 @@ figure.highlight {
   margin: var(--spacing-lg) 0;
   border-radius: var(--border-radius);
   background: var(--color-code-bg);
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
   transition: background var(--transition-slow);
 
   figcaption {
@@ -41,7 +42,7 @@ figure.highlight {
   table {
     margin: 0;
     border: none;
-    width: 100%;
+    min-width: 100%;
 
     td, th {
       border: none;
@@ -63,6 +64,8 @@ figure.highlight {
       color: var(--color-text-muted);
       font-size: 0.85em;
       line-height: 1.6;
+      white-space: pre;
+      overflow-wrap: normal;
 
       .line {
         padding: 0 var(--spacing-sm);
@@ -79,11 +82,26 @@ figure.highlight {
       color: var(--color-code-text);
       font-size: 0.85em;
       line-height: 1.6;
+      white-space: pre;
+      overflow-wrap: normal;
+      word-break: normal;
 
       .line {
         padding: 0 var(--spacing-xs);
       }
     }
+  }
+
+  // Direct pre (no line numbers, no table)
+  > pre {
+    margin: 0;
+    padding: var(--spacing-md);
+    white-space: pre;
+    overflow-wrap: normal;
+    word-break: normal;
+    color: var(--color-code-text);
+    font-size: 0.85em;
+    line-height: 1.6;
   }
 
   // Code block language label

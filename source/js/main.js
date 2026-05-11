@@ -24,28 +24,7 @@
   function toggleTheme() {
     var current = document.documentElement.getAttribute('data-theme') || 'light';
     var target = current === 'dark' ? 'light' : 'dark';
-
-    // If banner exists, animate color wash inside it
-    var banner = document.querySelector('.home-banner-bg');
-    if (banner) {
-      // Read target gradient by temporarily switching
-      applyTheme(target);
-      var targetGradient = getComputedStyle(banner).background;
-      applyTheme(current);
-
-      // Create wash layer that slides down inside the banner
-      var wash = document.createElement('div');
-      wash.className = 'banner-wash-layer';
-      wash.style.background = targetGradient;
-      banner.appendChild(wash);
-
-      wash.addEventListener('animationend', function () {
-        applyTheme(target);
-        wash.remove();
-      });
-    } else {
-      applyTheme(target);
-    }
+    applyTheme(target);
   }
 
   applyTheme(getPreferredTheme());
@@ -301,18 +280,20 @@
       block.insertBefore(header, block.firstChild);
 
       btn.addEventListener('click', function () {
-        var code = block.querySelector('.code pre') || block.querySelector('pre');
+        var self = this;
+        var parentBlock = self.closest('figure.highlight');
+        var code = parentBlock.querySelector('.code pre') || parentBlock.querySelector('pre');
         var text = code ? code.textContent : '';
         navigator.clipboard.writeText(text).then(function () {
-          btn.textContent = 'Copied!';
-          btn.classList.add('copied');
+          self.textContent = 'Copied!';
+          self.classList.add('copied');
           setTimeout(function () {
-            btn.textContent = 'Copy';
-            btn.classList.remove('copied');
+            self.textContent = 'Copy';
+            self.classList.remove('copied');
           }, 2000);
         }).catch(function () {
-          btn.textContent = 'Failed';
-          setTimeout(function () { btn.textContent = 'Copy'; }, 2000);
+          self.textContent = 'Failed';
+          setTimeout(function () { self.textContent = 'Copy'; }, 2000);
         });
       });
     }
@@ -394,4 +375,5 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   }
+
 })();

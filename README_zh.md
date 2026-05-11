@@ -2,22 +2,7 @@
 
 一款极简、衬线优先的 Hexo 主题，支持暗色模式、本地搜索，以及 Konami 密码触发的像素艺术彩蛋。
 
-![](https://picsum.photos/id/64/800/400)
-
-## 特性
-
-- **衬线优先排版** — Times New Roman / Noto Serif SC，18px 基础字号，宽裕的行高
-- **暗色模式** — CSS 变量驱动，localStorage 持久化，跟随系统偏好
-- **本地搜索** — 预生成 `search.json`，弹窗式搜索，支持键盘上下选择
-- **像素彩蛋** — 按下 `↑↑↓↓←→←→` `b` `a` 进入像素艺术模式，再次按下退出
-- **首页横幅** — 径向渐变背景，底部弧线收尾，像素模式下阶梯状底边
-- **图片自动排列** — 连续多图自动居中并排，超宽自动换行
-- **回到顶部** — 滚动显示，像素模式同步像素化
-- **代码块增强** — 行号、语言标签 + 复制按钮、暖色语法高亮
-- **文章封面图** — 通过 front-matter 为文章设置封面图
-- **国际化** — 中文 / 英文
-- **响应式** — 移动端适配
-- **零依赖** — 无 jQuery，纯原生 JS
+[English](README.md)
 
 ## 快速开始
 
@@ -65,6 +50,9 @@ social:
   bilibili: https://space.bilibili.com/yourid
   telegram: https://t.me/yourname
   weibo: https://weibo.com/yourname
+
+# 公告（显示在 banner 和文章列表之间，留空则隐藏）
+announcement:
 
 # 功能开关
 search: true          # 本地搜索

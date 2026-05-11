@@ -18,7 +18,7 @@ body {
   line-height: var(--line-height);
   color: var(--color-text);
   background: var(--color-bg);
-  transition: background var(--transition-slow), color var(--transition-slow);
+  transition: background 0.8s ease, color 0.8s ease;
 }
 
 a {
@@ -109,6 +109,8 @@ blockquote {
   border-radius: 0 var(--border-radius) var(--border-radius) 0;
   color: var(--color-text-secondary);
   font-style: italic;
+  overflow-wrap: break-word;
+  word-break: break-word;
 
   p:last-child { margin-bottom: 0; }
 }

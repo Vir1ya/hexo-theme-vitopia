@@ -164,6 +164,7 @@
   // ---- Code text explicit override ----
   figure.highlight {
     background: var(--color-code-bg);
+    transition: background 1.2s steps(5, end);
 
     .code pre {
       color: var(--color-code-text);
@@ -194,7 +195,13 @@
     background: var(--color-accent);
     color: var(--color-bg);
   }
+
+  // ---- Pixel dissolve transition ----
+  body {
+    transition: background 1.2s steps(5, end), color 1.2s steps(5, end);
+  }
 }
+
 
 // ===============
 // Pixel Light Mode (dark mode toggle)
