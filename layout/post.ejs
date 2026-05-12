@@ -1,2 +1,38 @@
 <%- partial('_partial/article', {post: page, index: false}) %>
+
 <%- partial('_partial/post/nav', {post: page}) %>
+
+<script>
+(function() {
+  var title = '<%= page.title %>';
+  var url   = '<%= encodeURI(url_for(page.permalink)) %>';
+  var desc  = '<% if (page.excerpt) { %><%= encodeURI(strip_html(page.excerpt).substring(0, 200)) %><% } else if (page.description) { %><%= encodeURI(page.description) %><% } else { %><%- encodeURI(strip_html(page.content).substring(0, 200)) %><% } %>';
+  var cover = '<% if (page.cover) { %><%= encodeURI(page.cover) %><% } %>';
+
+  function doShare(platform) {
+    if (typeof mqq !== 'undefined' && mqq.invoke) {
+      mqq.invoke('share', platform === 'qzone' ? 'toQz' : 'toQQ', {
+        imgUrl: cover,
+        title: title,
+        desc: desc,
+        link: url
+      }, function() {});
+      return;
+    }
+    var base = platform === 'qzone'
+      ? 'https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey'
+      : 'https://connect.qq.com/widget/shareqq/index.html';
+    var shareUrl = base + '?url=' + encodeURIComponent(url)
+      + '&title=' + encodeURIComponent(title)
+      + '&desc=' + encodeURIComponent(desc);
+    window.open(shareUrl, '_blank', 'width=600,height=500');
+  }
+
+  document.querySelectorAll('.share-item').forEach(function(el) {
+    el.addEventListener('click', function(e) {
+      e.preventDefault();
+      doShare(this.dataset.platform);
+    });
+  });
+})();
+</script>

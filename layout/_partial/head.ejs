@@ -19,6 +19,9 @@
   <title><% if (title) { %><%= title %> | <% } %><%= config.title %></title>
 
   <%- open_graph() %>
+<% if (page.cover) { %>
+<meta property="og:image" content="<%= page.cover %>">
+<% } %>
 
   <% if (theme.favicon) { %>
     <%- favicon_tag(theme.favicon) %>

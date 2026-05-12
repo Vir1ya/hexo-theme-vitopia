@@ -200,9 +200,94 @@
 }
 
 // ===============
+// Post Share
+// ===============
+.share-widget {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    right: 0;
+    bottom: -6px;
+    width: 80px;
+  }
+}
+
+.share-toggle {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: color var(--transition), border-color var(--transition), transform var(--transition);
+
+  &:hover {
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+    transform: scale(1.1);
+  }
+
+  .share-icon { pointer-events: none; }
+}
+
+.share-items {
+  position: absolute;
+  right: 36px;
+  display: flex;
+  gap: 6px;
+  opacity: 0;
+  transform: translateX(4px);
+  transition: opacity 0.15s ease 0.3s, transform 0.15s ease 0.3s;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.share-item {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  transition: transform var(--transition);
+  cursor: pointer;
+
+  &:hover { transform: scale(1.15); }
+}
+
+.share-item-qzone { background: #f9c74f; }
+.share-item-qq    { background: #12b7f5; }
+
+.share-widget:hover .share-items {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 0.15s ease 0s, transform 0.15s ease 0s;
+  pointer-events: auto;
+}
+
+// ===============
+// Post Footer & Tags
+// ===============
+
+// ===============
 // Post Footer & Tags
 // ===============
 .post-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-top: var(--spacing-2xl);
   padding-top: var(--spacing-lg);
   border-top: 1px solid var(--color-border);
