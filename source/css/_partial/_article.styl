@@ -269,6 +269,46 @@
 
 .share-item-qzone { background: #f9c74f; }
 .share-item-qq    { background: #12b7f5; }
+.share-item-save-image { background: var(--color-accent); }
+
+.share-item.is-busy {
+  pointer-events: none;
+  opacity: 0.7;
+  width: auto;
+  padding: 0 10px;
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: #fff;
+}
+
+// ===============
+// Save-as-Image snapshot container (off-screen, used only by html2canvas)
+// ===============
+.snapshot-root {
+  position: fixed;
+  top: 0;
+  left: -99999px;
+  width: var(--container-width);
+  padding: var(--spacing-xl);
+  background: var(--color-bg);
+  // Hide interactive elements that don't belong in a static image
+  .copy-btn,
+  .code-header,
+  .headerlink,
+  .share-widget {
+    display: none !important;
+  }
+  // Neutralize card shadow/border so the long image is clean.
+  // Kill the fadeIn animation: a cloned node replays it from opacity:0,
+  // and html2canvas snapshots mid-animation → a washed-out image.
+  .post-card.single {
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+    animation: none !important;
+    opacity: 1 !important;
+  }
+}
 
 .share-widget:hover .share-items {
   opacity: 1;

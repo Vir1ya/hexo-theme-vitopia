@@ -31,8 +31,81 @@
   document.querySelectorAll('.share-item').forEach(function(el) {
     el.addEventListener('click', function(e) {
       e.preventDefault();
+      if (this.dataset.action === 'save-image') {
+        saveArticleAsImage(this);
+        return;
+      }
       doShare(this.dataset.platform);
     });
   });
+
+  // ===============
+  // Save Article as Image (html2canvas)
+  // ===============
+  var HTML2CANVAS_URL = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+  var generatingLabel = '<%= __('save_image_generating') %>';
+  var failedLabel = '<%= __('save_image_failed') %>';
+
+  function loadHtml2Canvas(onDone, onError) {
+    if (window.html2canvas) { onDone(); return; }
+    var s = document.createElement('script');
+    s.src = HTML2CANVAS_URL;
+    s.onload = onDone;
+    s.onerror = onError || function () {};
+    document.head.appendChild(s);
+  }
+
+  function saveArticleAsImage(btn) {
+    var card = document.querySelector('.post-card.single');
+    if (!card) return;
+
+    var original = btn.innerHTML;
+    btn.classList.add('is-busy');
+    btn.innerHTML = generatingLabel;
+
+    function fail(msg) {
+      btn.classList.remove('is-busy');
+      btn.innerHTML = original;
+      alert(msg || failedLabel);
+    }
+
+    // Wait for web fonts so text doesn't fall back mid-snapshot
+    var fontsReady = (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
+
+    loadHtml2Canvas(function () {
+      fontsReady.then(function () {
+        // Clone the article card into an off-screen container so the snapshot
+        // is clean: no page chrome (fixed header/back-to-top), no hover state,
+        // and we can hide interactive elements (copy buttons, anchor links).
+        var root = document.createElement('div');
+        root.className = 'snapshot-root';
+        root.setAttribute('data-theme', document.documentElement.getAttribute('data-theme') || 'light');
+        var clone = card.cloneNode(true);
+        root.appendChild(clone);
+        document.body.appendChild(root);
+
+        window.html2canvas(root, {
+          useCORS: true,
+          allowTaint: false,
+          backgroundColor: null,
+          scale: window.devicePixelRatio > 1 ? 2 : 2,
+          logging: false
+        }).then(function (canvas) {
+          document.body.removeChild(root);
+          var a = document.createElement('a');
+          a.download = (title || 'article').replace(/[\\/:*?"<>|]/g, '_') + '.png';
+          a.href = canvas.toDataURL('image/png');
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          btn.classList.remove('is-busy');
+          btn.innerHTML = original;
+        }).catch(function (err) {
+          if (root.parentNode) document.body.removeChild(root);
+          fail(failedLabel);
+        });
+      }).catch(function () { fail(failedLabel); });
+    }, function () { fail(failedLabel); });
+  }
 })();
 </script>
