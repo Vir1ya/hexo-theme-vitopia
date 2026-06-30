@@ -19,3 +19,6 @@ wordcount: 字
 min2read: 分钟阅读
 toc: 目录
 top: 回到顶部
+save_as_image: 保存为图片
+save_image_generating: 生成中...
+save_image_failed: 保存图片失败，请重试

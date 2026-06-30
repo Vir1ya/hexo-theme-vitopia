@@ -19,3 +19,6 @@ wordcount: words
 min2read: min read
 toc: Table of Contents
 top: Back to top
+save_as_image: Save as image
+save_image_generating: Generating...
+save_image_failed: Failed to save image, please retry
