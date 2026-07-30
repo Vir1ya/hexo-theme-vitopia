@@ -8,8 +8,8 @@
   right: 0;
   height: var(--header-height);
   background: var(--color-header-bg);
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--color-border);
   z-index: 100;
   transition: background var(--transition-slow), border-color var(--transition-slow);
@@ -23,10 +23,12 @@
 }
 
 .site-title {
-  font-size: 1rem;
-  font-weight: 700;
+  font-size: var(--font-size-sm);
+  font-family: var(--font-display);
+  font-weight: 200;
   color: var(--color-text);
-  letter-spacing: -0.02em;
+  letter-spacing: 0.18em;
+  text-transform: lowercase;
 
   &:hover {
     color: var(--color-accent);
@@ -36,45 +38,63 @@
 .site-nav {
   display: flex;
   align-items: center;
-  gap: var(--spacing-xl);
+  gap: var(--spacing-lg);
 }
 
 .nav-link {
-  font-size: var(--font-size-sm);
-  font-weight: 500;
-  color: var(--color-text-secondary);
+  position: relative;
   padding: var(--spacing-xs) 0;
-  border-bottom: 2px solid transparent;
-  transition: color var(--transition), border-color var(--transition);
+  font-size: var(--font-size-xs);
+  font-weight: 200;
+  color: var(--color-text-secondary);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background: var(--color-text);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--transition-slow);
+  }
 
   &:hover {
     color: var(--color-text);
-    border-bottom-color: var(--color-accent);
+
+    &::after {
+      transform: scaleX(1);
+    }
   }
 }
 
 .header-actions {
   display: flex;
   align-items: center;
-  gap: 2px;
+  gap: var(--spacing-xs);
 }
 
 .btn-icon {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 34px;
-  height: 34px;
+  width: 32px;
+  height: 32px;
   border: none;
-  border-radius: var(--border-radius);
+  border-radius: 50%;
   background: transparent;
   color: var(--color-text-secondary);
   cursor: pointer;
-  transition: background var(--transition), color var(--transition);
+  transition: color var(--transition), transform var(--transition-slow), background var(--transition);
 
   &:hover {
-    background: var(--color-bg-secondary);
-    color: var(--color-text);
+    color: var(--color-accent);
+    background: var(--color-accent-dim);
+    transform: translateY(-1px);
   }
 }
 

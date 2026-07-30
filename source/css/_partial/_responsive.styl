@@ -19,55 +19,93 @@
     gap: var(--spacing-md);
   }
 
-  .home-bio {
-    flex-direction: column;
-    align-items: flex-start;
-    margin-bottom: var(--spacing-2xl);
+  .home-stage {
+    min-height: auto;
+    padding: var(--spacing-2xl) 0;
+  }
+
+  .home-profile,
+  .home-posts {
+    max-width: 100%;
+  }
+
+  .home-avatar-wrap {
+    min-width: 82px;
+    min-height: 82px;
+    margin-bottom: var(--spacing-lg);
   }
 
   .home-avatar {
-    width: 52px;
-    height: 52px;
+    width: 82px;
+    height: 82px;
   }
 
-  .home-bio-text .home-author {
-    font-size: var(--font-size-xl);
+  .home-author-link,
+  .post-card.single .post-title {
+    font-size: var(--font-size-2xl);
+  }
+
+  .home-bio-desc,
+  .post-body {
+    font-size: var(--font-size-sm);
   }
 
   .search-modal {
-    margin: 0 var(--spacing-md);
     max-width: 100%;
   }
 
   .site-footer .container {
     flex-direction: column;
-    gap: var(--spacing-sm);
     text-align: center;
   }
 
   .post-nav {
-    flex-direction: column;
-    gap: var(--spacing-md);
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .site-header {
+    height: auto;
+    min-height: var(--header-height);
+
+    .container {
+      flex-wrap: wrap;
+      gap: var(--spacing-sm);
+      padding-top: var(--spacing-sm);
+      padding-bottom: var(--spacing-sm);
+    }
   }
 
-  .post-title {
-    font-size: var(--font-size-lg);
+  .site-nav {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .main-content {
+    padding-top: calc(var(--header-height) + var(--spacing-4xl));
   }
 }
 
 @media (max-width: 480px) {
-  .site-header .container {
-    flex-wrap: wrap;
-    gap: var(--spacing-sm);
+  .container {
+    padding: 0 var(--spacing-md);
   }
 
-  .header-actions {
-    order: 3;
+  .home-stage {
+    padding-top: var(--spacing-xl);
   }
 
-  .post-category {
-    font-size: 0.7rem;
-    padding: 1px 6px;
+  .home-link {
+    padding: 0;
+  }
+
+  .post-card:hover,
+  .archive-post-item:hover,
+  .category-item a:hover {
+    padding-left: 4px;
   }
 
   .archive-post-item {
@@ -76,6 +114,46 @@
 
     time {
       min-width: auto;
+    }
+  }
+
+  .post-footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 640px) {
+  .archive-timeline {
+    padding-left: 2rem;
+  }
+
+  .archive-timeline-line {
+    left: 8px;
+  }
+
+  .archive-year-label {
+    margin-left: 0;
+    padding-left: 0;
+  }
+
+  .archive-timeline-item.is-left,
+  .archive-timeline-item.is-right {
+    width: 100%;
+    margin-right: 0;
+    margin-left: 0;
+    padding-right: 0;
+    padding-left: var(--spacing-lg);
+    text-align: left;
+
+    &:hover {
+      padding-right: 0;
+      padding-left: calc(var(--spacing-lg) + var(--spacing-xs));
+    }
+
+    .archive-timeline-dot {
+      right: auto;
+      left: calc(-2rem + 4px);
     }
   }
 }

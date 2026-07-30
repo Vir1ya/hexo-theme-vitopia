@@ -1,6 +1,6 @@
 # Vitopia
 
-A minimalist, serif-first Hexo theme with dark mode, local search, and a Konami-code pixel art easter egg.
+A minimalist, serif-first Hexo theme with dark mode and local search.
 
 [中文](README_zh.md)
 
@@ -49,7 +49,7 @@ social:
   telegram: https://t.me/yourname
   weibo: https://weibo.com/yourname
 
-# Announcement (shown between banner and posts, leave empty to hide)
+# Announcement (shown below the homepage profile, leave empty to hide)
 announcement:
 
 # Features
@@ -79,17 +79,19 @@ cover: /images/cover.jpg
 
 Place images in `source/images/` and reference them as `/images/filename.jpg`. External URLs also work.
 
-## Pixel Mode
+### Article Music
 
-Press `↑ ↑ ↓ ↓ ← → ← →` `b` `a` (the Konami code) to toggle pixel art mode.
+Add a `music` block to a post's front matter. The player stays collapsed until the reader opens it.
 
-Pixel mode uses the **Silver** pixel font by [Poppy Works](https://poppyworks.itch.io/silver) (CC BY 4.0). Download `Silver.ttf` and place it at:
-
+```yaml
+music:
+  server: netease
+  type: song
+  id: 2691385220
+  autoplay: false
 ```
-themes/vitopia/source/fonts/Silver.ttf
-```
 
-If the font is missing, it falls back to **Press Start 2P** (Google Fonts, loaded automatically).
+Direct audio URLs are also supported with `url`, `title`, `artist`, and an optional `cover` field. Music playback uses APlayer and MetingJS from a CDN.
 
 ## Browser Support
 

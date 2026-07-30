@@ -4,10 +4,10 @@
 
 <script>
 (function() {
-  var title = '<%= page.title %>';
-  var url   = '<%= encodeURI(url_for(page.permalink)) %>';
-  var desc  = '<% if (page.excerpt) { %><%= encodeURI(strip_html(page.excerpt).substring(0, 200)) %><% } else if (page.description) { %><%= encodeURI(page.description) %><% } else { %><%- encodeURI(strip_html(page.content).substring(0, 200)) %><% } %>';
-  var cover = '<% if (page.cover) { %><%= encodeURI(page.cover) %><% } %>';
+  var title = <%- JSON.stringify(page.title) %>;
+  var url   = <%- JSON.stringify(encodeURI(url_for(page.permalink))) %>;
+  var desc  = <%- JSON.stringify(encodeURI(strip_html(page.excerpt || page.description || page.content || '').substring(0, 200))) %>;
+  var cover = <%- JSON.stringify(page.cover || '') %>;
 
   function doShare(platform) {
     if (typeof mqq !== 'undefined' && mqq.invoke) {
@@ -43,8 +43,8 @@
   // Save Article as Image (html2canvas)
   // ===============
   var HTML2CANVAS_URL = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
-  var generatingLabel = '<%= __('save_image_generating') %>';
-  var failedLabel = '<%= __('save_image_failed') %>';
+  var generatingLabel = <%- JSON.stringify(__('save_image_generating')) %>;
+  var failedLabel = <%- JSON.stringify(__('save_image_failed')) %>;
 
   function loadHtml2Canvas(onDone, onError) {
     if (window.html2canvas) { onDone(); return; }
@@ -53,6 +53,22 @@
     s.onload = onDone;
     s.onerror = onError || function () {};
     document.head.appendChild(s);
+  }
+
+  // Simple toast notification
+  function showToast(msg) {
+    var t = document.createElement('div');
+    t.textContent = msg;
+    t.style.cssText = 'position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);' +
+      'padding:0.6rem 1.2rem;background:var(--color-text,#2c2416);color:var(--color-bg,#fffef9);' +
+      'border-radius:8px;font-size:var(--font-size-sm,0.833rem);z-index:99999;' +
+      'animation:fadeIn 0.3s ease;box-shadow:0 4px 12px rgba(0,0,0,0.15);';
+    document.body.appendChild(t);
+    setTimeout(function () {
+      t.style.opacity = '0';
+      t.style.transition = 'opacity 0.3s';
+      setTimeout(function () { document.body.removeChild(t); }, 400);
+    }, 2500);
   }
 
   function saveArticleAsImage(btn) {
@@ -66,7 +82,7 @@
     function fail(msg) {
       btn.classList.remove('is-busy');
       btn.innerHTML = original;
-      alert(msg || failedLabel);
+      showToast(msg || failedLabel);
     }
 
     // Wait for web fonts so text doesn't fall back mid-snapshot
@@ -88,7 +104,7 @@
           useCORS: true,
           allowTaint: false,
           backgroundColor: null,
-          scale: window.devicePixelRatio > 1 ? 2 : 2,
+          scale: 2,
           logging: false
         }).then(function (canvas) {
           document.body.removeChild(root);
@@ -107,5 +123,97 @@
       }).catch(function () { fail(failedLabel); });
     }, function () { fail(failedLabel); });
   }
+
+  // ===============
+  // Music Player (APlayer + MetingJS) — CDN 预加载，点击秒开
+  // ===============
+  (function() {
+    var music = <%- JSON.stringify(page.music || null) %>;
+    if (!music) return;
+
+    var container = document.getElementById('music-player');
+    var wrapper = document.getElementById('music-player-wrapper');
+    var toggle = document.getElementById('music-toggle');
+    if (!container || !wrapper || !toggle) return;
+
+    var inited = false;
+
+    var APLAYER_CSS = 'https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.css';
+    var APLAYER_JS  = 'https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.js';
+    var METING_JS   = 'https://cdnjs.cloudflare.com/ajax/libs/meting/2.0.1/Meting.min.js';
+
+    function loadCSS(url) {
+      var link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = url;
+      document.head.appendChild(link);
+    }
+
+    function loadJS(url) {
+      var s = document.createElement('script');
+      s.src = url;
+      document.head.appendChild(s);
+    }
+
+    // 预加载：页面加载时就开始下载 CDN 资源
+    loadCSS(APLAYER_CSS);
+    loadJS(APLAYER_JS);
+    if (music.server && music.id) {
+      loadJS(METING_JS);
+    }
+
+    function initPlayer() {
+      if (inited) return;
+      inited = true;
+
+      if (music.server && music.id) {
+        var el = document.createElement('meting-js');
+        el.setAttribute('server', music.server);
+        el.setAttribute('type', music.type || 'song');
+        el.setAttribute('id', music.id);
+        el.setAttribute('theme', '#b83a2a');
+        if (music.autoplay) el.setAttribute('autoplay', 'true');
+        container.appendChild(el);
+      } else if (music.url) {
+        // 直链模式：等 APlayer 加载完再初始化
+        var checkAPlayer = setInterval(function() {
+          if (window.APlayer) {
+            clearInterval(checkAPlayer);
+            new APlayer({
+              container: container,
+              mini: false,
+              autoplay: !!music.autoplay,
+              lrcType: 0,
+              theme: '#b83a2a',
+              loop: 'all',
+              preload: 'auto',
+              volume: 0.7,
+              mutex: true,
+              audio: [{
+                name: music.title || 'Untitled',
+                artist: music.artist || 'Unknown',
+                url: music.url,
+                cover: music.cover || ''
+              }]
+            });
+          }
+        }, 200);
+      }
+    }
+
+    function setCollapsed(collapsed) {
+      wrapper.classList.toggle('collapsed', collapsed);
+      toggle.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+    }
+
+    toggle.addEventListener('click', function() {
+      if (!inited) {
+        setCollapsed(false);
+        initPlayer();
+      } else {
+        setCollapsed(!wrapper.classList.contains('collapsed'));
+      }
+    });
+  })();
 })();
 </script>

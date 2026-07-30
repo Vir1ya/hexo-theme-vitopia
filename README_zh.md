@@ -1,6 +1,6 @@
 # Vitopia
 
-一款极简、衬线优先的 Hexo 主题，支持暗色模式、本地搜索，以及 Konami 密码触发的像素艺术彩蛋。
+一款极简、衬线优先的 Hexo 主题，支持暗色模式和本地搜索。
 
 [English](README.md)
 
@@ -51,7 +51,7 @@ social:
   telegram: https://t.me/yourname
   weibo: https://weibo.com/yourname
 
-# 公告（显示在 banner 和文章列表之间，留空则隐藏）
+# 公告（显示在首页个人信息下方，留空则隐藏）
 announcement:
 
 # 功能开关
@@ -80,17 +80,19 @@ cover: /images/cover.jpg
 ---
 ```
 
-## 像素模式
+### 文章音乐
 
-按下 Konami 密码 `↑ ↑ ↓ ↓ ← → ← →` `b` `a` 即可进入像素模式。
+在文章 front matter 中加入 `music` 配置。播放器默认收起，读者点击后展开：
 
-像素模式使用 [Poppy Works](https://poppyworks.itch.io/silver) 设计的 **Silver** 像素字体（CC BY 4.0 协议）。请下载 `Silver.ttf` 并放到：
-
+```yaml
+music:
+  server: netease
+  type: song
+  id: 2691385220
+  autoplay: false
 ```
-themes/vitopia/source/fonts/Silver.ttf
-```
 
-如果没有放置字体文件，会自动回退到 **Press Start 2P**（Google Fonts 自动加载）。
+也支持使用 `url`、`title`、`artist` 和可选的 `cover` 配置直链音频。播放器依赖 CDN 提供的 APlayer 与 MetingJS。
 
 ## 浏览器支持
 

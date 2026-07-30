@@ -4,34 +4,26 @@
 menu:
   Home: /
   Archives: /archives
-  # About: /about
+  About: /about
 
 # ===============
 # Site
 # ===============
-author: Your Name
-# Footer copyright year (e.g. "2026"). Leave empty for current year.
-since:
+author: Viriya
+since: 2023
 
 # ===============
 # Homepage Bio
 # ===============
-# Avatar image path (e.g. /images/avatar.jpg, or a full URL)
-avatar:
-# Brief intro shown on homepage
+avatar: /images/avatar.jpg
 bio:
-# Email for contact icon
-email:
+email: a_study_in_scarlet@163.com
 
 # ===============
 # Social links
 # ===============
 social:
-  # github: https://github.com/yourname
-  # twitter: https://twitter.com/yourname
-  # bilibili: https://space.bilibili.com/yourid
-  # telegram: https://t.me/yourname
-  # weibo: https://weibo.com/yourname
+  github: https://github.com/Vir1ya
 
 # ===============
 # Features
@@ -39,12 +31,6 @@ social:
 search: true
 dark_mode: true
 code_copy: true
-
-# ===============
-# Pixel Mode
-# ===============
-# Author name shown in pixel mode (leave empty to keep the normal name)
-pixel_name: 
 
 # ===============
 # Comments
@@ -59,7 +45,7 @@ valine:
 # Announcement
 # ===============
 # Text shown below social icons on homepage. Leave empty to hide.
-announcement:
+announcement: 少即是多，慢慢打磨。
 
 # ===============
 # Misc

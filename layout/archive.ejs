@@ -1,5 +1,6 @@
-<div class="archive-page">
-  <% var lastYear; %>
+<div class="archive-page archive-timeline">
+  <div class="archive-timeline-line" aria-hidden="true"></div>
+  <% var lastYear; var postIndex = 0; %>
   <% page.posts.each(function(post){ %>
     <% var year = post.date.year(); %>
     <% if (lastYear !== year) { %>
@@ -12,10 +13,12 @@
         <div class="archive-posts">
       <% lastYear = year; %>
     <% } %>
-    <div class="archive-post-item">
+    <div class="archive-post-item archive-timeline-item <%= postIndex % 2 === 0 ? 'is-left' : 'is-right' %>">
+      <span class="archive-timeline-dot" aria-hidden="true"></span>
       <time datetime="<%= date_xml(post.date) %>"><%= date(post.date, 'MM-DD') %></time>
       <a href="<%- url_for(post.path) %>"><%= post.title %></a>
     </div>
+    <% postIndex++; %>
   <% }) %>
   <% if (page.posts.length) { %>
     </div>

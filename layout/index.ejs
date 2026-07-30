@@ -1,43 +1,64 @@
-<div class="home-banner">
-  <div class="home-banner-bg"></div>
-  <div class="home-banner-content">
-    <div class="home-hero">
-      <% if (theme.avatar) { %>
-        <img class="home-avatar" src="<%= theme.avatar %>" alt="avatar">
-      <% } %>
-      <a href="<%- url_for('/about') %>" class="home-author-link" data-pixel-name="<%= theme.pixel_name || '' %>"><%= theme.author || config.author %></a>
-      <% if (theme.bio) { %>
-        <p class="home-bio-desc"><%= theme.bio %></p>
-      <% } %>
-      <div class="home-icons">
-        <% if (theme.social) { %>
-          <% for (var name in theme.social) { %>
-            <a href="<%= theme.social[name] %>" target="_blank" rel="noopener" class="home-icon-link" aria-label="<%= name %>"><%- socialIcon(name) %></a>
-          <% } %>
-        <% } %>
-        <a href="mailto:<%= theme.email || '#' %>" class="home-icon-link" aria-label="Email">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4L12 13 2 4"/></svg>
-        </a>
-        <a href="<%- url_for('/atom.xml') %>" class="home-icon-link" aria-label="RSS">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>
-        </a>
+<section class="home-stage">
+  <canvas class="home-field" id="home-field" aria-hidden="true"></canvas>
+
+  <div class="home-profile">
+    <% if (theme.avatar) { %>
+      <div class="home-avatar-wrap home-rise home-d1 home-magnetic" data-magnet-strength="16" data-magnet-radius="160">
+        <span class="home-avatar-ring"></span>
+        <img class="home-avatar home-magnetic" data-magnet-strength="9" data-magnet-radius="220" src="<%= theme.avatar %>" alt="avatar">
       </div>
-    </div>
-  </div>
-</div>
+    <% } %>
 
-<% if (theme.announcement) { %>
-  <div class="home-announcement">
-    <span class="announcement-icon">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-    </span>
-    <span class="announcement-text"><%= theme.announcement %></span>
-  </div>
-<% } %>
+    <a href="<%- url_for('/about') %>" class="home-author-link home-rise home-d2"><%= theme.author || config.author %></a>
 
-<div class="posts-list">
-  <% page.posts.each(function(post){ %>
-    <%- partial('_partial/article', {post: post, index: true}) %>
-  <% }) %>
-</div>
-<%- partial('_partial/pagination') %>
+    <% if (theme.bio) { %>
+      <p class="home-bio-desc home-rise home-d3"><%= theme.bio %></p>
+    <% } %>
+
+    <div class="home-divider home-rise home-d4"></div>
+
+    <nav class="home-links home-rise home-d5" aria-label="Profile links">
+      <% if (theme.social) { %>
+        <% for (var name in theme.social) { %>
+          <a href="<%= theme.social[name] %>" target="_blank" rel="noopener" class="home-link home-magnetic" data-magnet-strength="12" data-magnet-radius="72" aria-label="<%= name %>" title="<%= name %>">
+            <span class="home-link-mark"><%- socialIcon(name) %></span>
+          </a>
+        <% } %>
+      <% } %>
+      <a href="mailto:<%= theme.email || '#' %>" class="home-link home-magnetic" data-magnet-strength="12" data-magnet-radius="72" aria-label="Email" title="Email">
+        <span class="home-link-mark">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4L12 13 2 4"/></svg>
+        </span>
+      </a>
+      <a href="<%- url_for('/atom.xml') %>" class="home-link home-magnetic" data-magnet-strength="12" data-magnet-radius="72" aria-label="RSS" title="RSS">
+        <span class="home-link-mark">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>
+        </span>
+      </a>
+    </nav>
+
+    <% if (theme.announcement) { %>
+      <div class="home-announcement home-rise home-d6 home-magnetic" data-magnet-strength="10" data-magnet-radius="110">
+        <span class="announcement-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        </span>
+        <span class="announcement-text"><%= theme.announcement %></span>
+      </div>
+    <% } %>
+  </div>
+</section>
+
+<section class="home-posts home-rise home-d6" aria-label="Recent posts">
+  <div class="home-section-heading">
+    <span>POSTS</span>
+    <span class="home-section-dot">.</span>
+  </div>
+  <div class="posts-list">
+    <% page.posts.each(function(post){ %>
+      <div class="home-post-magnetic home-magnetic" data-magnet-strength="6" data-magnet-radius="94">
+        <%- partial('_partial/article', {post: post, index: true}) %>
+      </div>
+    <% }) %>
+  </div>
+  <%- partial('_partial/pagination') %>
+</section>

@@ -11,6 +11,18 @@
       </div>
     </header>
 
+    <% if (!index && post.music) { %>
+      <div class="music-player-wrapper collapsed" id="music-player-wrapper">
+        <button class="music-toggle" id="music-toggle" type="button" title="聆听本文音乐" aria-label="切换音乐播放器" aria-expanded="false">
+          <span class="music-toggle-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l10-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="16" cy="16" r="3"/></svg>
+          </span>
+          <span class="music-toggle-label">Listen</span>
+        </button>
+        <div id="music-player" class="music-player"></div>
+      </div>
+    <% } %>
+
     <div class="post-body e-content" itemprop="articleBody">
       <% if (index) { %>
         <% if (post.excerpt) { %>
