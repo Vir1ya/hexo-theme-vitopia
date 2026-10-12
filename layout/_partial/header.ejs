@@ -6,6 +6,9 @@
       <% for (var name in theme.menu) { %>
         <a href="<%- url_for(theme.menu[name]) %>" class="nav-link"><%= __(name.toLowerCase()) || name %></a>
       <% } %>
+      <% if (theme.reviews && theme.reviews.enable && !Object.values(theme.menu || {}).some(function (url) { return String(url).replace(/^\/+|\/+$/g, '') === review_path().replace(/\/$/, ''); })) { %>
+        <a href="<%- url_for(review_path()) %>" class="nav-link"><%= __('reviews') %></a>
+      <% } %>
     </nav>
 
     <div class="header-actions">

@@ -2,34 +2,31 @@
 
 ## Project Structure & Module Organization
 
-This repository is `hexo-theme-vitopia`, a Hexo theme intended to live under a Hexo site's `themes/vitopia/` directory. Top-level layouts are in `layout/` (`index.ejs`, `post.ejs`, `page.ejs`, archive views), with reusable fragments under `layout/_partial/`. Styles live in `source/css/`; `style.styl` is the only Stylus entry point and imports variables, base rules, partials, and dark mode. Browser behavior is in `source/js/main.js`. Hexo helpers and generators are in `scripts/helpers.js`. Translations are in `languages/en.yml` and `languages/zh-CN.yml`. Theme defaults are in `_config.yml`.
+Vitopia is a Hexo theme installed in a site's `themes/vitopia/` directory. EJS templates live in `layout/`, with shared fragments in `layout/_partial/`. Stylus files live in `source/css/`; `style.styl` imports variables, base styles and partials. Browser behavior lives in `source/js/main.js`. Hexo helpers and generators belong in `scripts/`, reusable review utilities in `lib/`, translations in `languages/`, and theme defaults in `_config.yml`.
 
 ## Build, Test, and Development Commands
 
-This theme has no local npm scripts, test suite, or lint configuration. Develop it inside a real Hexo blog that uses the theme.
+The theme has no standalone npm scripts, test runner or lint configuration. Install it in a separate Hexo test site and run commands from that site's root:
 
 ```bash
-cd /home/link/Documents/blog/Blog
-hexo clean && hexo generate   # rebuild public/ with fresh theme output
-hexo server                    # preview at http://localhost:4000
+npx hexo clean && npx hexo generate # rebuild the test site
+npx hexo server                    # preview at http://localhost:4000
 ```
 
-Stylus and EJS changes are usually picked up by `hexo server`. Changes in `scripts/helpers.js` should be checked after `hexo clean`.
+Keep test posts, covers and site configuration in the test site. Validate generator changes after a clean build; template and style changes usually update through the development server.
 
 ## Coding Style & Naming Conventions
 
-Follow existing EJS, Stylus, and plain JavaScript patterns. Use two-space indentation in templates and scripts where the surrounding file does. Prefer theme variables from `source/css/_variables.styl` such as `--color-*`, `--font-*`, and `--spacing-*` instead of hard-coded colors or spacing. Add new Stylus partials only when they have a clear responsibility, and import them from `source/css/style.styl`. User-facing strings should use translation keys and be added to both language YAML files.
+Use two-space indentation and preserve existing JavaScript semicolons. Use descriptive lowercase filenames. Reuse `--color-*`, `--font-*` and `--spacing-*` variables from `source/css/_variables.styl`. Import new Stylus partials through `style.styl`. Add interface strings to both `languages/en.yml` and `languages/zh-CN.yml`.
 
 ## Testing Guidelines
 
-There are no automated tests. Validate changes by generating the host Hexo site and manually checking affected pages in the browser, including light/dark mode, mobile width, search, post pages, and the archive timeline. For helper changes, confirm generated files such as `/search.json` are correct.
+Check affected pages at desktop and mobile widths, in light and dark mode. Verify search, archives, pagination, music and review filters where relevant. Hidden reviews must retain search entries and article routes without creating empty list pages. Check generated `search.json` after search-helper changes. No coverage threshold is configured.
 
 ## Commit & Pull Request Guidelines
 
-Recent commits use concise Chinese scope prefixes, for example `[保存为图片] 新增 html2canvas 文章长图功能`, with occasional release commits such as `Initial release: Vitopia v1.0.0`. Keep commits focused and describe the visible behavior changed.
+Use focused commits with concise scope summaries, such as `[琉璃集] 新增作品评价页`. Describe visible behavior, configuration changes and validation in pull requests; link related issues and include screenshots for layout changes. Document new CDN dependencies.
 
-Pull requests should include a short summary, linked issue when applicable, manual verification steps, and screenshots or recordings for visual changes. Note any configuration changes in `_config.yml` and any new external CDN or asset dependency.
+## Theme Distribution
 
-## Agent-Specific Instructions
-
-This repository is the theme only; avoid adding project-level Hexo site content here unless explicitly requested.
+Keep this repository limited to reusable theme source, documentation and licensing. Put personal author details, contact information and social links in a site's `_config.vitopia.yml`. Exclude local agent settings, private credentials, article content and generated sites. Preserve GPL-3.0 licensing and project attribution.

@@ -22,3 +22,15 @@ top: Back to top
 save_as_image: Save as image
 save_image_generating: Generating...
 save_image_failed: Failed to save image, please retry
+
+reviews: Liuli Collection
+review_filter: Work category
+review_all: All
+review_anime: Anime
+review_manga: Manga
+review_game: Games
+review_literature: Literature
+review_other: Other
+review_pinned: Pinned
+review_no_cover: No cover
+review_empty: No reviews in this category yet.

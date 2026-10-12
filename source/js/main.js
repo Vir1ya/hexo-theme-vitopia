@@ -40,6 +40,25 @@
     }
   });
 
+  // Work reviews: keep all content accessible without JavaScript.
+  var workItems = Array.from(document.querySelectorAll('.work-item'));
+  var reviewEmpty = document.querySelector('.reviews-empty');
+  document.querySelectorAll('[data-review-filter]').forEach(function (button) {
+    button.addEventListener('click', function () {
+      var type = button.dataset.reviewFilter;
+      document.querySelectorAll('[data-review-filter]').forEach(function (item) {
+        item.setAttribute('aria-pressed', String(item === button));
+      });
+      workItems.forEach(function (item) { item.hidden = type !== 'all' && item.dataset.workType !== type; });
+      if (reviewEmpty) reviewEmpty.hidden = workItems.some(function (item) { return !item.hidden; });
+    });
+  });
+  document.querySelectorAll('.work-cover img').forEach(function (image) {
+    var fallback = function () { image.parentElement.classList.add('missing-cover'); };
+    image.addEventListener('error', fallback);
+    if (image.complete && !image.naturalWidth) fallback();
+  });
+
   // ===============
   // Search
   // ===============

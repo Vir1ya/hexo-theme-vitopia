@@ -25,7 +25,14 @@
 
     <div class="post-body e-content" itemprop="articleBody">
       <% if (index) { %>
-        <% if (post.excerpt) { %>
+        <% var work = work_data(post); %>
+        <% if (work && post.description) { %>
+          <p><%= post.description %></p>
+        <% } else if (work && work.review) { %>
+          <p><%- work.review %></p>
+        <% } else if (work && work.synopsis) { %>
+          <p><%= work.synopsis %></p>
+        <% } else if (post.excerpt) { %>
           <%- post.excerpt %>
         <% } else { %>
           <p><%- strip_html(post.content).substring(0, 80) %>...</p>

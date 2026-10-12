@@ -1,0 +1,121 @@
+.reviews-heading
+  margin-bottom var(--spacing-lg)
+  h1
+    font-size var(--font-size-2xl)
+
+.review-filters
+  display flex
+  flex-wrap wrap
+  gap var(--spacing-sm)
+  margin-bottom var(--spacing-xl)
+  button
+    color var(--color-text-secondary)
+    background transparent
+    border 1px solid transparent
+    border-radius var(--border-radius)
+    padding 0.25rem 0.7rem
+    font inherit
+    font-size var(--font-size-sm)
+    cursor pointer
+    &[aria-pressed='true']
+      color var(--color-text)
+      background var(--color-bg-secondary)
+      border-color var(--color-border)
+
+.work-item
+  display grid
+  grid-template-columns 106px minmax(0, 1fr)
+  gap var(--spacing-md)
+  padding var(--spacing-lg) 0
+  border-bottom 1px solid var(--color-border)
+  &[hidden]
+    display none
+  &:first-child
+    padding-top 0
+
+.work-cover
+  display block
+  width 100%
+  position relative
+  align-self start
+  aspect-ratio 3 / 4
+  overflow hidden
+  background var(--color-bg-secondary)
+  border 1px solid var(--color-border)
+  border-radius 8px
+  img
+    width 100%
+    height 100%
+    object-fit cover
+    display block
+  .work-cover-placeholder
+    display none
+  &.missing-cover
+    img
+      display none
+    .work-cover-placeholder
+      display grid
+      place-items center
+      height 100%
+      color var(--color-text-muted)
+      font-size var(--font-size-xs)
+
+.work-text
+  font-size var(--font-size-sm)
+  line-height 1.75
+  overflow-wrap anywhere
+  h2
+    margin 0
+    font-size 1rem
+    font-weight 600
+    line-height 1.5
+    a
+      color var(--color-text)
+      text-decoration none
+      &:hover
+        color var(--color-link)
+  p
+    margin 0.25rem 0 0
+  .work-meta
+    font-size var(--font-size-xs)
+    color var(--color-text-muted)
+    margin-bottom 0.3rem
+
+.work-year
+  font-weight normal
+  font-size var(--font-size-sm)
+
+.work-pin
+  font-size var(--font-size-xs)
+  font-weight normal
+  color var(--color-link)
+  margin-left var(--spacing-sm)
+
+.work-synopsis
+  white-space pre-line
+
+.work-short-review strong
+  font-weight 700
+
+.work-sources
+  display flex
+  flex-wrap wrap
+  gap var(--spacing-sm)
+  margin-top var(--spacing-sm)
+  font-size var(--font-size-xs)
+  a
+    color var(--color-text-secondary)
+    background var(--color-bg-secondary)
+    border-radius 999px
+    padding 0.05rem 0.45rem
+
+.reviews-empty
+  padding var(--spacing-xl) 0
+  color var(--color-text-muted)
+
+@media (max-width: 480px)
+  .work-item
+    grid-template-columns 78px minmax(0, 1fr)
+    gap 0.75rem
+  .work-text h2
+    font-size var(--font-size-sm)

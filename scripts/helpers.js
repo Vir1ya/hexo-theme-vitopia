@@ -9,12 +9,14 @@ hexo.extend.generator.register('search-json', function (locals) {
 
   var posts = locals.posts.sort('-date');
   var result = posts.map(function (post) {
+    var work = post.work && typeof post.work === 'object' ? post.work : {};
+    var workText = [work.title, work.meta, work.synopsis, work.review].filter(function (value) { return typeof value === 'string'; }).join(' ');
     return {
       title: post.title || '',
       date: post.date ? post.date.format('YYYY-MM-DD') : '',
       path: config.root + post.path,
       excerpt: post.excerpt ? post.excerpt.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim().substring(0, 200) : '',
-      content: post.content ? post.content.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim() : ''
+      content: [post.content || '', workText].filter(Boolean).join(' ').replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim()
     };
   });
 

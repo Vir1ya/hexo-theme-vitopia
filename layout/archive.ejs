@@ -1,3 +1,4 @@
+<% if (typeof archiveTitle !== 'undefined') { %><h1 class="page-title"><%= archiveTitle %></h1><% } %>
 <div class="archive-page archive-timeline">
   <div class="archive-timeline-line" aria-hidden="true"></div>
   <% var lastYear; var postIndex = 0; %>
@@ -25,3 +26,4 @@
   </section>
   <% } %>
 </div>
+<%- partial('_partial/pagination') %>

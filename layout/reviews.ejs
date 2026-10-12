@@ -1,0 +1,26 @@
+<section class="reviews-page">
+  <header class="reviews-heading"><h1><%= __('reviews') %></h1></header>
+  <div class="review-filters" role="group" aria-label="<%= __('review_filter') %>">
+    <% ['all', 'anime', 'manga', 'game', 'literature', 'other'].forEach(function (type) { %>
+      <button type="button" data-review-filter="<%= type %>" aria-pressed="<%= type === 'all' ? 'true' : 'false' %>"><%= __('review_' + type) %></button>
+    <% }); %>
+  </div>
+  <div class="review-list">
+    <% page.reviewPosts.forEach(function (post) { var work = work_data(post); %>
+      <article class="work-item" data-work-type="<%= work.type %>">
+        <a class="work-cover<%= work.cover ? '' : ' missing-cover' %>" href="<%- url_for(post.path) %>" aria-label="<%= work.title %>">
+          <% if (work.cover) { %><img src="<%= /^https?:/.test(work.cover) ? work.cover : url_for(work.cover) %>" alt="<%= work.title %>" loading="lazy" referrerpolicy="no-referrer"><% } %>
+          <span class="work-cover-placeholder"><%= __('review_no_cover') %></span>
+        </a>
+        <div class="work-text">
+          <h2><a href="<%- url_for(post.path) %>"><%= work.title %></a><% if (work.year) { %><span class="work-year">（<%= work.year %>）</span><% } %><% if (work.pinned) { %><span class="work-pin"><%= __('review_pinned') %></span><% } %></h2>
+          <p class="work-meta"><%= work.meta || __('review_' + work.type) %></p>
+          <% if (work.synopsis) { %><p class="work-synopsis"><%= work.synopsis %></p><% } %>
+          <% if (work.review) { %><p class="work-short-review"><%- work.review %></p><% } %>
+          <% if (work.sources.length) { %><div class="work-sources"><% work.sources.forEach(function (source) { %><a href="<%= source.url %>" target="_blank" rel="noopener noreferrer"><%= source.label %> ↗</a><% }); %></div><% } %>
+        </div>
+      </article>
+    <% }); %>
+  </div>
+  <p class="reviews-empty" <%= page.reviewPosts.length ? 'hidden' : '' %>><%= __('review_empty') %></p>
+</section>

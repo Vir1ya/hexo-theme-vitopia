@@ -6,6 +6,7 @@
 
   <%
   var title = page.title;
+  if (page.reviewPosts) title = __('reviews');
   if (is_archive()) {
     title = __('archives');
     if (is_month()) title += ': ' + page.year + '/' + page.month;

@@ -23,7 +23,7 @@ hexo server
 
 ## Configuration
 
-Edit `themes/vitopia/_config.yml`:
+Create `_config.vitopia.yml` in your Hexo site root for personal settings. The theme defaults contain no site owner details; keeping overrides outside the theme also preserves them during updates:
 
 ```yaml
 # Navigation
@@ -100,3 +100,43 @@ All modern browsers (Chrome, Firefox, Safari, Edge).
 ## License
 
 GPL-3.0
+
+## Liuli Collection (work reviews)
+
+Enable the optional page in the site's `_config.vitopia.yml`:
+
+```yaml
+reviews:
+  enable: true
+  path: reviews
+```
+
+The page is named “Liuli Collection” (“琉璃集” in Chinese). Vitopia generates `/reviews/` and adds its navigation link automatically. Do not create a page at the same route. `path` accepts a relative directory. Existing navigation links to that route are not duplicated. The feature defaults to disabled.
+
+Reviews are ordinary Markdown posts with a `work` front matter object:
+
+```yaml
+---
+title: My thoughts on a work
+date: 2026-10-11 12:00:00
+work:
+  title: Work title
+  type: anime
+  year: 1997
+  cover: https://example.com/cover.jpg
+  meta: Creator · 39 episodes · Themes
+  synopsis: A plain-text introduction.
+  review: '**Recommended.** A personal impression with *emphasis*.'
+  sources:
+    - label: Bangumi
+      url: https://bgm.tv/subject/1453
+  pinned: false
+  listed: false
+---
+```
+
+Write the full review in the post body. Work covers are independent of post covers. They accept http(s) URLs or `/images/…` paths, with a placeholder when unavailable. Short reviews support bold, italic, line breaks and Markdown links; raw HTML is escaped. Sources accept `{label, url}` objects or URL strings and open separately from the article link.
+
+Types: `anime`, `manga`, `game`, `literature`, `other`. Pinned items come first, followed by descending post publication dates. `listed` defaults to `false`; only explicit `true` adds a review to ordinary lists. The default excludes a review from home, archives, tag and category lists while keeping its article route, work page entry and search result. Disabling the feature restores ordinary listing behavior.
+
+The theme builds offline and needs no administration app or new CDN. Metadata can be entered manually or imported with a compatible external editor; no editor is bundled with the theme. Keep reference links when using imported descriptions and write your own impressions. English and Simplified Chinese are supported; `ch` is accepted as an alias for Chinese when reviews are enabled.

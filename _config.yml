@@ -9,21 +9,21 @@ menu:
 # ===============
 # Site
 # ===============
-author: Viriya
-since: 2023
+# Leave empty to use the author configured in the Hexo site.
+author:
+since:
 
 # ===============
 # Homepage Bio
 # ===============
-avatar: /images/avatar.jpg
+avatar:
 bio:
-email: a_study_in_scarlet@163.com
+email:
 
 # ===============
 # Social links
 # ===============
-social:
-  github: https://github.com/Vir1ya
+social: {}
 
 # ===============
 # Features
@@ -31,6 +31,11 @@ social:
 search: true
 dark_mode: true
 code_copy: true
+
+# Work reviews, generated from posts with a `work` front matter object.
+reviews:
+  enable: false
+  path: reviews
 
 # ===============
 # Comments
@@ -45,9 +50,9 @@ valine:
 # Announcement
 # ===============
 # Text shown below social icons on homepage. Leave empty to hide.
-announcement: 少即是多，慢慢打磨。
+announcement:
 
 # ===============
 # Misc
 # ===============
-favicon: /favicon.ico
+favicon:

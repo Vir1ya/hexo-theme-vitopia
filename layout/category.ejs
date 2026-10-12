@@ -1,7 +1,10 @@
+<% if (page.category) { %>
+<%- partial('archive', { archiveTitle: __('categories') + ': ' + page.category }) %>
+<% } else { %>
 <div class="category-page">
   <h1 class="page-title"><%= __('categories') %></h1>
   <ul class="category-list">
-    <% site.categories.each(function(cat){ %>
+    <% visible_taxonomy('categories').forEach(function(cat){ %>
       <li class="category-item">
         <a href="<%- url_for(cat.path) %>">
           <%= cat.name %>
@@ -11,3 +14,4 @@
     <% }) %>
   </ul>
 </div>
+<% } %>

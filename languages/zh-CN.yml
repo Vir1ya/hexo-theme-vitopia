@@ -22,3 +22,15 @@ top: 回到顶部
 save_as_image: 保存为图片
 save_image_generating: 生成中...
 save_image_failed: 保存图片失败，请重试
+
+reviews: 琉璃集
+review_filter: 作品分类
+review_all: 全部
+review_anime: 动画
+review_manga: 漫画
+review_game: 游戏
+review_literature: 文学
+review_other: 其他
+review_pinned: 置顶
+review_no_cover: 暂无封面
+review_empty: 这个分类还没有作品。
