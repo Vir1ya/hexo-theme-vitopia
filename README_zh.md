@@ -144,3 +144,19 @@ work:
 主题构建与访问不获取外部资料，无需后台或新增 CDN。Bangumi、豆瓣、Wikipedia 来源链接用于标注引用，资料可以手写，也可由兼容的外部编辑器导入；主题本身不附带后台工具。引用资料请保留来源，个人短评自己撰写。
 
 作品文章和封面文件放在你的 Hexo 站点中，分别使用 `source/_posts/` 和 `source/images/`。运行 `hexo generate` 后会生成作品页；主题仓库不包含个人文章、测试站或封面素材。
+
+### 画廊
+
+画廊是与归档、关于并列的独立页面，地址为 `/gallery/`，启用后自动出现在顶部导航中，不依赖琉璃集开关。如果菜单已有 `/gallery/` 链接，不会重复添加。在站点 `_config.vitopia.yml` 中配置图片；本地文件放在站点 `source/images/gallery/`。支持 http(s) 地址及可选的 `alt`、`caption`，也支持直接填写图片 URL。页面最大宽度为 1280px，瀑布流列数随可用宽度自动调整，图片保持原比例。点击图片可查看原图。默认关闭；设置 `gallery.enable: true` 启用。不需要手动创建同地址页面，已有页面占用此地址时构建会提示冲突。
+
+```yaml
+gallery:
+  enable: true
+  images:
+    - src: /images/gallery/photo.jpg
+      alt: Image description
+      caption: Optional caption
+      tags: [Travel, Nature]
+```
+
+每张图片可配置多个 `tags`，画廊顶部自动生成可多选的标签筛选，仅显示同时包含所有已选标签的图片（交集匹配）。再次点击标签取消选择，点击“全部”清空选择并显示所有图片。标签按文字显示并自动去重，未设置标签的图片仍出现在全部列表中。

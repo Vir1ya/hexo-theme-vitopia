@@ -59,6 +59,31 @@
     if (image.complete && !image.naturalWidth) fallback();
   });
 
+  // Gallery tags are read as data rather than interpolated into selectors.
+  var galleryItems = Array.from(document.querySelectorAll('.gallery-item')).map(function (item) {
+    return { element: item, tags: JSON.parse(item.dataset.galleryTags || '[]') };
+  });
+  var galleryEmpty = document.querySelector('.gallery-filter-empty');
+  var gallerySelectedTags = new Set();
+  var galleryButtons = Array.from(document.querySelectorAll('[data-gallery-filter]'));
+  galleryButtons.forEach(function (button) {
+    button.addEventListener('click', function () {
+      var tag = button.dataset.galleryFilter;
+      if (!tag) gallerySelectedTags.clear();
+      else if (gallerySelectedTags.has(tag)) gallerySelectedTags.delete(tag);
+      else gallerySelectedTags.add(tag);
+      galleryButtons.forEach(function (item) {
+        var value = item.dataset.galleryFilter;
+        item.setAttribute('aria-pressed', String(value ? gallerySelectedTags.has(value) : gallerySelectedTags.size === 0));
+      });
+      var selected = Array.from(gallerySelectedTags);
+      galleryItems.forEach(function (item) {
+        item.element.hidden = !selected.every(function (value) { return item.tags.indexOf(value) >= 0; });
+      });
+      if (galleryEmpty) galleryEmpty.hidden = galleryItems.some(function (item) { return !item.element.hidden; });
+    });
+  });
+
   // ===============
   // Search
   // ===============

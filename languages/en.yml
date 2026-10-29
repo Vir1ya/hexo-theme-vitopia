@@ -34,3 +34,10 @@ review_other: Other
 review_pinned: Pinned
 review_no_cover: No cover
 review_empty: No reviews in this category yet.
+gallery: Gallery
+gallery_original: View original image
+gallery_empty: No images in the gallery yet.
+gallery_filter: Image tags
+gallery_all: All
+gallery_no_matches: No images match all selected tags.
+gallery_filter_hint: Select multiple tags to match all of them. Click a selected tag to remove it, or All to clear the selection.

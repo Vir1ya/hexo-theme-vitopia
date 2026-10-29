@@ -140,3 +140,19 @@ Write the full review in the post body. Work covers are independent of post cove
 Types: `anime`, `manga`, `game`, `literature`, `other`. Pinned items come first, followed by descending post publication dates. `listed` defaults to `false`; only explicit `true` adds a review to ordinary lists. The default excludes a review from home, archives, tag and category lists while keeping its article route, work page entry and search result. Disabling the feature restores ordinary listing behavior.
 
 The theme builds offline and needs no administration app or new CDN. Metadata can be entered manually or imported with a compatible external editor; no editor is bundled with the theme. Keep reference links when using imported descriptions and write your own impressions. English and Simplified Chinese are supported; `ch` is accepted as an alias for Chinese when reviews are enabled.
+
+### Gallery
+
+The standalone `/gallery/` page appears in the top navigation alongside Archives and About when enabled, independently of reviews. Existing menu links to `/gallery/` are not duplicated. Configure images in your site’s `_config.vitopia.yml`, using local files under `source/images/gallery/` or http(s) URLs. Entries accept optional `alt` and `caption`, or a plain image URL. The gallery expands up to 1280px with responsive masonry columns and preserves image aspect ratios. Click images to open originals. Disabled by default; set `gallery.enable: true` to enable. Do not create another page at this route; existing page conflicts cause a build error.
+
+```yaml
+gallery:
+  enable: true
+  images:
+    - src: /images/gallery/photo.jpg
+      alt: Image description
+      caption: Optional caption
+      tags: [Travel, Nature]
+```
+
+Each image accepts multiple `tags`. Gallery filters support selecting multiple tags and match images containing all selected tags (intersection). Click a selected tag to deselect it; All clears every selection and also shows untagged images. Labels are escaped as text and deduplicated.

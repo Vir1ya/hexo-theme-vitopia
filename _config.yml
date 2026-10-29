@@ -37,6 +37,11 @@ reviews:
   enable: false
   path: reviews
 
+# Standalone gallery page at /gallery/.
+gallery:
+  enable: false
+  images: []
+
 # ===============
 # Comments
 # ===============

@@ -9,6 +9,9 @@
       <% if (theme.reviews && theme.reviews.enable && !Object.values(theme.menu || {}).some(function (url) { return String(url).replace(/^\/+|\/+$/g, '') === review_path().replace(/\/$/, ''); })) { %>
         <a href="<%- url_for(review_path()) %>" class="nav-link"><%= __('reviews') %></a>
       <% } %>
+      <% if (theme.gallery && theme.gallery.enable && !Object.values(theme.menu || {}).some(function (url) { return String(url).replace(/^\/+|\/+$/g, '') === 'gallery'; })) { %>
+        <a href="<%- url_for('/gallery/') %>" class="nav-link"><%= __('gallery') %></a>
+      <% } %>
     </nav>
 
     <div class="header-actions">

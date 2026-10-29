@@ -5,7 +5,7 @@
   <div class="site-wrapper">
     <%- partial('_partial/header') %>
     <main class="main-content">
-      <div class="container">
+      <div class="container<%= Array.isArray(page.galleryImages) ? ' gallery-container' : '' %>">
         <%- body %>
       </div>
     </main>

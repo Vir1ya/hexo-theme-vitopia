@@ -1,0 +1,32 @@
+<section class="gallery-page">
+  <header class="gallery-heading"><h1><%= __('gallery') %></h1></header>
+  <% if (page.galleryImages.length) { %>
+    <% if (page.galleryTags.length) { %>
+      <p class="gallery-filter-hint" id="gallery-filter-hint"><%= __('gallery_filter_hint') %></p>
+      <div class="gallery-filters" role="group" aria-label="<%= __('gallery_filter') %>" aria-describedby="gallery-filter-hint">
+        <button type="button" data-gallery-filter="" aria-pressed="true"><%= __('gallery_all') %></button>
+        <% page.galleryTags.forEach(function (tag) { %>
+          <button type="button" data-gallery-filter="<%= tag %>" aria-pressed="false"><%= tag %></button>
+        <% }); %>
+      </div>
+    <% } %>
+    <div class="gallery-grid">
+      <% page.galleryImages.forEach(function (image) { var src = /^https?:/.test(image.src) ? image.src : url_for(image.src); %>
+        <figure class="gallery-item" data-gallery-tags="<%= JSON.stringify(image.tags) %>">
+          <a href="<%= src %>" target="_blank" rel="noopener noreferrer" aria-label="<%= image.alt || image.caption || __('gallery_original') %>">
+            <img src="<%= src %>" alt="<%= image.alt %>" loading="lazy" decoding="async">
+          </a>
+          <% if (image.caption || image.tags.length) { %>
+            <figcaption>
+              <% if (image.caption) { %><p><%= image.caption %></p><% } %>
+              <% if (image.tags.length) { %><div class="gallery-tags"><% image.tags.forEach(function (tag) { %><span><%= tag %></span><% }); %></div><% } %>
+            </figcaption>
+          <% } %>
+        </figure>
+      <% }); %>
+    </div>
+    <p class="gallery-filter-empty" hidden><%= __('gallery_no_matches') %></p>
+  <% } else { %>
+    <p class="gallery-empty"><%= __('gallery_empty') %></p>
+  <% } %>
+</section>

@@ -3,9 +3,9 @@
 var reviews = require('../lib/reviews');
 
 // This repository historically uses `ch` in site config. Support that alias
-// without changing a site's configuration or duplicating translation files.
+// for both collection pages without changing site configuration.
 hexo.extend.filter.register('before_generate', function () {
-  if (hexo.theme.config.reviews && hexo.theme.config.reviews.enable && [].concat(hexo.config.language).indexOf('ch') >= 0 && hexo.theme.i18n.list().indexOf('ch') < 0) {
+  if (((hexo.theme.config.reviews && hexo.theme.config.reviews.enable) || (hexo.theme.config.gallery && hexo.theme.config.gallery.enable)) && [].concat(hexo.config.language).indexOf('ch') >= 0 && hexo.theme.i18n.list().indexOf('ch') < 0) {
     hexo.theme.i18n.set('ch', hexo.theme.i18n.get('zh-CN'));
   }
 });
