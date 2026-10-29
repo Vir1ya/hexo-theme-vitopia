@@ -85,6 +85,45 @@
   });
 
   // ===============
+  // Gallery Viewer
+  // ===============
+  var galleryViewer = document.querySelector('.gallery-viewer');
+  if (galleryViewer && typeof galleryViewer.showModal === 'function') {
+    var galleryViewerImage = galleryViewer.querySelector('.gallery-viewer-image');
+    var galleryViewerText = galleryViewer.querySelector('.gallery-viewer-text');
+    var galleryOriginal = galleryViewer.querySelector('[data-gallery-original]');
+    var galleryReturnFocus;
+    var galleryPreviousOverflow;
+    document.querySelectorAll('.gallery-image-link').forEach(function (link) {
+      link.addEventListener('click', function (event) {
+        if (event.defaultPrevented || event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+        event.preventDefault();
+        var item = link.closest('.gallery-item');
+        galleryViewerImage.src = link.href;
+        galleryViewerImage.alt = link.querySelector('img').alt;
+        galleryOriginal.href = link.href;
+        var authorText = item.querySelector('.gallery-author-text');
+        galleryViewerText.replaceChildren(authorText.content.cloneNode(true));
+        galleryViewerText.hidden = !authorText.innerHTML.trim();
+        galleryReturnFocus = link;
+        galleryPreviousOverflow = document.body.style.overflow;
+        galleryViewer.showModal();
+        document.body.style.overflow = 'hidden';
+        galleryViewer.scrollTop = 0;
+      });
+    });
+    galleryViewer.querySelector('[data-gallery-close]').addEventListener('click', function () { galleryViewer.close(); });
+    galleryViewer.addEventListener('click', function (event) { if (event.target === galleryViewer) galleryViewer.close(); });
+    galleryViewer.addEventListener('close', function () {
+      document.body.style.overflow = galleryPreviousOverflow;
+      galleryViewerImage.removeAttribute('src');
+      galleryViewerText.textContent = '';
+      galleryViewerText.hidden = true;
+      if (galleryReturnFocus) galleryReturnFocus.focus({ preventScroll: true });
+    });
+  }
+
+  // ===============
   // Search
   // ===============
   var searchOverlay = document.getElementById('search-overlay');

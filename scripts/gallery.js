@@ -1,6 +1,7 @@
 'use strict';
 
 var reviews = require('../lib/reviews');
+var galleryText = require('../lib/gallery');
 
 hexo.extend.generator.register('gallery', function (locals) {
   var gallery = hexo.theme.config.gallery;
@@ -17,7 +18,8 @@ hexo.extend.generator.register('gallery', function (locals) {
     if (!src || src.charAt(0) === '#') return null;
     var tags = typeof image.tags === 'string' ? image.tags.split(/[,，\n]/) : image.tags;
     tags = Array.isArray(tags) ? tags.filter(function (tag) { return typeof tag === 'string'; }).map(function (tag) { return tag.trim(); }).filter(Boolean) : [];
-    return { src: src, alt: String(image.alt || ''), caption: String(image.caption || ''), tags: Array.from(new Set(tags)) };
+    var text = String(image.text || '');
+    return { src: src, alt: String(image.alt || ''), caption: String(image.caption || ''), text: text, textHtml: galleryText.renderMarkdown(hexo, text), tags: Array.from(new Set(tags)) };
   }).filter(Boolean);
   var labels = hexo.theme.i18n.get(hexo.config.language);
   return { path: path + 'index.html', layout: 'gallery', data: { title: labels.gallery || 'Gallery', galleryImages: images, galleryTags: Array.from(new Set(images.reduce(function (tags, image) { return tags.concat(image.tags); }, []))) } };

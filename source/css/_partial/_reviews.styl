@@ -175,3 +175,121 @@
   margin-bottom var(--spacing-md)
   color var(--color-text-secondary)
   font-size var(--font-size-xs)
+
+.gallery-image-link
+  position relative
+  overflow hidden
+  border-radius var(--border-radius)
+  &::after
+    content ''
+    position absolute
+    inset 0
+    z-index 1
+    background var(--color-gallery-mask)
+    opacity 0
+    pointer-events none
+    transition opacity var(--transition)
+  .gallery-description
+    position absolute
+    z-index 2
+    left 0
+    right 0
+    bottom 0
+    max-height 100%
+    overflow auto
+    padding var(--spacing-md)
+    color var(--color-gallery-caption)
+    font-size var(--font-size-sm)
+    white-space pre-wrap
+    overflow-wrap anywhere
+    opacity 0
+    transform translateY(6px)
+    transition opacity var(--transition), transform var(--transition)
+  &:hover::after,
+  &:focus-visible::after,
+  &:hover .gallery-description,
+  &:focus-visible .gallery-description
+    opacity 1
+    transform translateY(0)
+
+.gallery-viewer
+  width calc(100% - 2rem)
+  max-width 1280px
+  max-height calc(100dvh - 2rem)
+  margin auto
+  padding var(--spacing-lg)
+  overflow auto
+  color var(--color-text)
+  background var(--color-bg)
+  border 1px solid var(--color-border)
+  border-radius var(--border-radius)
+  &::backdrop
+    background var(--color-overlay)
+    backdrop-filter blur(4px)
+
+.gallery-viewer-toolbar
+  display flex
+  align-items center
+  justify-content space-between
+  gap var(--spacing-md)
+  margin-bottom var(--spacing-md)
+  font-size var(--font-size-sm)
+  button
+    padding var(--spacing-xs) var(--spacing-sm)
+    color var(--color-text)
+    background var(--color-bg-secondary)
+    border 1px solid var(--color-border)
+    border-radius var(--border-radius)
+    font inherit
+    cursor pointer
+  a:focus-visible,
+  button:focus-visible
+    outline 2px solid var(--color-accent)
+    outline-offset 3px
+
+.gallery-viewer-image
+  display block
+  max-width 100%
+  height auto
+  margin 0 auto
+
+.gallery-viewer-text
+  max-width var(--container-width)
+  margin var(--spacing-xl) auto 0
+  white-space normal
+  overflow-wrap anywhere
+  overflow-x auto
+  line-height var(--line-height)
+  > :first-child
+    margin-top 0
+  > :last-child
+    margin-bottom 0
+  pre
+    overflow-x auto
+    padding var(--spacing-md)
+    margin var(--spacing-lg) 0
+    background var(--color-code-bg)
+    color var(--color-code-text)
+    white-space pre
+  code
+    overflow-wrap normal
+  a
+    text-decoration underline
+    text-underline-offset 0.15em
+
+@media (hover: none)
+  .gallery-image-link::after
+    display none
+  .gallery-image-link .gallery-description
+    position static
+    display block
+    color var(--color-text)
+    background var(--color-bg-secondary)
+    opacity 1
+    transform none
+
+@media (max-width: 560px)
+  .gallery-viewer
+    width calc(100% - 1rem)
+    max-height calc(100dvh - 1rem)
+    padding var(--spacing-md)

@@ -143,7 +143,7 @@ The theme builds offline and needs no administration app or new CDN. Metadata ca
 
 ### Gallery
 
-The standalone `/gallery/` page appears in the top navigation alongside Archives and About when enabled, independently of reviews. Existing menu links to `/gallery/` are not duplicated. Configure images in your site’s `_config.vitopia.yml`, using local files under `source/images/gallery/` or http(s) URLs. Entries accept optional `alt` and `caption`, or a plain image URL. The gallery expands up to 1280px with responsive masonry columns and preserves image aspect ratios. Click images to open originals. Disabled by default; set `gallery.enable: true` to enable. Do not create another page at this route; existing page conflicts cause a build error.
+The standalone `/gallery/` page appears in the top navigation alongside Archives and About when enabled, independently of reviews. Existing menu links to `/gallery/` are not duplicated. Configure images in your site’s `_config.vitopia.yml`, using local files under `source/images/gallery/` or http(s) URLs. Entries accept optional `alt`, `caption` and `text`, or a plain image URL. The gallery expands up to 1280px with responsive masonry columns and preserves image aspect ratios. Click images to open a large-image dialog; close it with Escape, the Close button or the backdrop. A separate link opens the original image file. Disabled by default; set `gallery.enable: true` to enable. Do not create another page at this route; existing page conflicts cause a build error.
 
 ```yaml
 gallery:
@@ -151,8 +151,17 @@ gallery:
   images:
     - src: /images/gallery/photo.jpg
       alt: Image description
-      caption: Optional caption
+      caption: Hover description
+      text: |
+        ## A note from the author
+
+        **A moment to remember.**
+
+        - A detail
+        - A memory
       tags: [Travel, Nature]
 ```
 
 Each image accepts multiple `tags`. Gallery filters support selecting multiple tags and match images containing all selected tags (intersection). Click a selected tag to deselect it; All clears every selection and also shows untagged images. Labels are escaped as text and deduplicated.
+
+`caption` is the hover description, shown in white over a full-image dark overlay on hover or keyboard focus (displayed below thumbnails on touch devices). `text` is separate author text shown beneath the opened image; it supports Markdown headings, emphasis, lists, quotes, links, fenced code and tables. The site’s existing `hexo-renderer-marked` renders and sanitizes this text without changing article rendering or adding a CDN. Empty fields are hidden. Existing captions remain hover descriptions. `alt` stays independent as accessible alternative text.
