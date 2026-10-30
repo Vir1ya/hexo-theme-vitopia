@@ -40,7 +40,6 @@ gallery_empty: No images in the gallery yet.
 gallery_filter: Image tags
 gallery_all: All
 gallery_no_matches: No images match all selected tags.
-gallery_filter_hint: Select multiple tags to match all of them. Click a selected tag to remove it, or All to clear the selection.
 gallery_viewer: Image and author text
 gallery_original_file: Open original image file
 gallery_close: Close

@@ -40,7 +40,6 @@ gallery_empty: 画廊还没有图片。
 gallery_filter: 图片标签
 gallery_all: 全部
 gallery_no_matches: 没有同时匹配这些标签的图片。
-gallery_filter_hint: 可多选，仅显示同时包含所有已选标签的图片。再次点击取消，点击“全部”清空选择。
 gallery_viewer: 图片与作者文字
 gallery_original_file: 打开原图文件
 gallery_close: 关闭

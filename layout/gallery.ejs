@@ -2,8 +2,7 @@
   <header class="gallery-heading"><h1><%= __('gallery') %></h1></header>
   <% if (page.galleryImages.length) { %>
     <% if (page.galleryTags.length) { %>
-      <p class="gallery-filter-hint" id="gallery-filter-hint"><%= __('gallery_filter_hint') %></p>
-      <div class="gallery-filters" role="group" aria-label="<%= __('gallery_filter') %>" aria-describedby="gallery-filter-hint">
+      <div class="gallery-filters" role="group" aria-label="<%= __('gallery_filter') %>">
         <button type="button" data-gallery-filter="" aria-pressed="true"><%= __('gallery_all') %></button>
         <% page.galleryTags.forEach(function (tag) { %>
           <button type="button" data-gallery-filter="<%= tag %>" aria-pressed="false"><%= tag %></button>
