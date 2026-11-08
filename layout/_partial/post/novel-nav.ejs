@@ -1,0 +1,24 @@
+<nav class="post-nav novel-nav" aria-label="<%= __('novel_contents') %>">
+  <div class="post-nav-prev">
+    <% if (ctx.prev) { %>
+      <a href="<%- url_for(ctx.prev.path) %>" rel="prev">
+        <span class="post-nav-label"><%= __('novel_prev') %></span>
+        <span class="post-nav-title"><%= ctx.prev.title %></span>
+      </a>
+    <% } %>
+  </div>
+  <div class="novel-nav-toc">
+    <a href="<%- url_for(novel_path()) %>#<%= ctx.part.id %>">
+      <span class="post-nav-label"><%= __('novel_contents') %></span>
+      <span class="post-nav-title"><%= ctx.part.name || ('《' + ctx.book.name + '》') %></span>
+    </a>
+  </div>
+  <div class="post-nav-next">
+    <% if (ctx.next) { %>
+      <a href="<%- url_for(ctx.next.path) %>" rel="next">
+        <span class="post-nav-label"><%= __('novel_next') %></span>
+        <span class="post-nav-title"><%= ctx.next.title %></span>
+      </a>
+    <% } %>
+  </div>
+</nav>

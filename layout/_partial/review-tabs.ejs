@@ -1,0 +1,6 @@
+<% if (page.hasNovels) { %>
+  <nav class="review-tabs" aria-label="<%= __('reviews') %>">
+    <a href="<%- url_for(review_path()) %>"<% if (current === 'reviews') { %> aria-current="page"<% } %>><%= __('review_tab') %></a>
+    <a href="<%- url_for(novel_path()) %>"<% if (current === 'novels') { %> aria-current="page"<% } %>><%= __('novel_tab') %></a>
+  </nav>
+<% } %>

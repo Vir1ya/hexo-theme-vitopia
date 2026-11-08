@@ -1,5 +1,5 @@
 <section class="reviews-page">
-  <header class="reviews-heading"><h1><%= __('reviews') %></h1></header>
+  <header class="reviews-heading"><h1><%= __('reviews') %></h1><%- partial('_partial/review-tabs', {current: 'reviews'}) %></header>
   <div class="review-filters" role="group" aria-label="<%= __('review_filter') %>">
     <% ['all', 'anime', 'manga', 'game', 'literature', 'other'].forEach(function (type) { %>
       <button type="button" data-review-filter="<%= type %>" aria-pressed="<%= type === 'all' ? 'true' : 'false' %>"><%= __('review_' + type) %></button>

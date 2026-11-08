@@ -4,6 +4,10 @@
       <% if (!index && post.cover) { %>
         <img class="post-cover" src="<%= post.cover %>" alt="cover">
       <% } %>
+      <% var chapterCtx = !index && novel_context(post); %>
+      <% if (chapterCtx) { %>
+        <p class="novel-crumb"><a href="<%- url_for(novel_path()) %>#<%= chapterCtx.part.id %>"><%= __('novel_tab') %> · 《<%= chapterCtx.book.name %>》<% if (chapterCtx.part.name) { %> · <%= chapterCtx.part.name %><% } %></a><% if (chapterCtx.part.chapters.length > 1) { %><span><%= __('novel_chapter_n', chapterCtx.partIndex + 1, chapterCtx.part.chapters.length) %></span><% } %></p>
+      <% } %>
       <%- partial('post/title') %>
       <div class="post-meta">
         <%- partial('post/date') %>

@@ -34,6 +34,23 @@ review_other: 其他
 review_pinned: 置顶
 review_no_cover: 暂无封面
 review_empty: 这个分类还没有作品。
+review_tab: 品读
+novel_tab: 拙作
+novel_open: 打开《%s》的目录
+novel_contents: 目录
+novel_prev: 上一章
+novel_next: 下一章
+novel_chapter_n: 第 %d 章 / 共 %d 章
+novel_open_contents: 打开目录
+novel_all_parts: 全部篇目
+novel_parts: "%d 篇"
+novel_part_default: 正文
+novel_chapters: "%d 章"
+novel_words: 约 %d 字
+novel_updated: 更新于 %s
+novel_status_serial: 连载中
+novel_status_finished: 已完结
+novel_status_short: 短篇
 gallery: 画廊
 gallery_original: 查看原图
 gallery_empty: 画廊还没有图片。

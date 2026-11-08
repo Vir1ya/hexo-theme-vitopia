@@ -1,0 +1,59 @@
+<section class="reviews-page novels-page">
+  <header class="reviews-heading"><h1><%= __('reviews') %></h1><%- partial('_partial/review-tabs', {current: 'novels'}) %></header>
+  <noscript><style>.novel-folder { display: block; position: static; margin: var(--spacing-md) 0 0; width: auto; max-height: none; } .novel-view[hidden] { display: block; } .novel-open, .novel-back { display: none; }</style></noscript>
+  <% var folderIcon = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>'; %>
+  <div class="novel-shelf">
+    <% page.novelBooks.forEach(function (book) { var single = book.parts.length === 1; %>
+      <section class="novel-book" id="<%= book.id %>" aria-labelledby="<%= book.id %>-name">
+        <button type="button" class="novel-book-cover<%= book.cover ? '' : ' missing-cover' %>" data-novel-open="<%= book.id %>" aria-haspopup="dialog" aria-label="<%= __('novel_open', book.name) %>">
+          <% if (book.cover) { %><img src="<%= /^https?:/.test(book.cover) ? book.cover : url_for(book.cover) %>" alt="" loading="lazy" referrerpolicy="no-referrer"><% } %>
+          <span class="novel-book-spine" aria-hidden="true"><%= book.name %></span>
+        </button>
+        <div class="novel-book-text">
+          <h2 id="<%= book.id %>-name"><%= book.name %><% if (book.pinned) { %><span class="work-pin"><%= __('review_pinned') %></span><% } %></h2>
+          <p class="work-meta"><span class="novel-status novel-status-<%= book.status %>"><%= __('novel_status_' + book.status) %></span><% if (!single) { %> · <%= __('novel_parts', book.parts.length) %><% } %> · <%= __('novel_chapters', book.chapters.length) %> · <%= __('novel_words', book.words) %> · <%= __('novel_updated', date(book.updated, config.date_format)) %></p>
+          <% if (book.synopsis) { %><p class="work-synopsis"><%= book.synopsis %></p><% } %>
+          <button type="button" class="novel-open" data-novel-open="<%= book.id %>" aria-haspopup="dialog"><%- folderIcon %><span><%= __('novel_open_contents') %></span></button>
+        </div>
+        <dialog class="novel-folder" data-novel-folder="<%= book.id %>" aria-labelledby="<%= book.id %>-title">
+          <div class="novel-folder-head">
+            <h3 id="<%= book.id %>-title">《<%= book.name %>》</h3>
+            <button type="button" data-novel-close><%= __('gallery_close') %> ×</button>
+          </div>
+          <% if (!single) { %>
+            <div class="novel-view" data-novel-view="<%= book.id %>">
+              <ol class="novel-part-list">
+                <% book.parts.forEach(function (part) { %>
+                  <li>
+                    <button type="button" data-novel-part="<%= part.id %>">
+                      <%- folderIcon %>
+                      <span class="novel-part-text">
+                        <span class="novel-part-name"><%= part.name || __('novel_part_default') %></span>
+                        <% if (part.synopsis) { %><span class="novel-part-synopsis"><%= part.synopsis %></span><% } %>
+                      </span>
+                      <span class="novel-part-count"><%= __('novel_chapters', part.chapters.length) %></span>
+                    </button>
+                  </li>
+                <% }); %>
+              </ol>
+            </div>
+          <% } %>
+          <% book.parts.forEach(function (part) { %>
+            <div class="novel-view" data-novel-view="<%= part.id %>"<% if (!single) { %> hidden<% } %>>
+              <% if (!single) { %>
+                <button type="button" class="novel-back" data-novel-back="<%= book.id %>">← <%= __('novel_all_parts') %></button>
+                <h4 class="novel-part-title"><%= part.name || __('novel_part_default') %></h4>
+              <% } %>
+              <% if (part.synopsis) { %><p class="work-synopsis"><%= part.synopsis %></p><% } else if (single && book.synopsis) { %><p class="work-synopsis"><%= book.synopsis %></p><% } %>
+              <ol class="novel-chapters">
+                <% part.chapters.forEach(function (chapter) { %>
+                  <li><a href="<%- url_for(chapter.path) %>"><span class="novel-chapter-title"><%= chapter.title %></span><time datetime="<%= date_xml(chapter.date) %>"><%= date(chapter.date, config.date_format) %></time></a></li>
+                <% }); %>
+              </ol>
+            </div>
+          <% }); %>
+        </dialog>
+      </section>
+    <% }); %>
+  </div>
+</section>

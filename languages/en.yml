@@ -34,6 +34,23 @@ review_other: Other
 review_pinned: Pinned
 review_no_cover: No cover
 review_empty: No reviews in this category yet.
+review_tab: Reviews
+novel_tab: Writings
+novel_open: Open contents of %s
+novel_contents: Contents
+novel_prev: Previous chapter
+novel_next: Next chapter
+novel_chapter_n: Chapter %d of %d
+novel_open_contents: Open contents
+novel_all_parts: All parts
+novel_parts: "%d parts"
+novel_part_default: Contents
+novel_chapters: "%d chapters"
+novel_words: About %d characters
+novel_updated: Updated %s
+novel_status_serial: Ongoing
+novel_status_finished: Completed
+novel_status_short: Short story
 gallery: Gallery
 gallery_original: View original image
 gallery_empty: No images in the gallery yet.

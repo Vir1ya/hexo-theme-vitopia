@@ -288,3 +288,318 @@
     width calc(100% - 1rem)
     max-height calc(100dvh - 1rem)
     padding var(--spacing-md)
+
+// ===============
+// Writings (novels) under the Liuli Collection
+// ===============
+.review-tabs
+  display flex
+  gap var(--spacing-lg)
+  margin-top var(--spacing-sm)
+  border-bottom 1px solid var(--color-border)
+  a
+    position relative
+    padding var(--spacing-xs) 0 var(--spacing-sm)
+    color var(--color-text-muted)
+    text-decoration none
+    &:hover
+      color var(--color-text)
+    &[aria-current='page']
+      color var(--color-text)
+      font-weight 600
+      &::after
+        content ''
+        position absolute
+        left 0
+        right 0
+        bottom -1px
+        height 2px
+        background var(--color-link)
+
+.novel-shelf
+  display grid
+  gap 0
+
+.novel-book
+  display grid
+  grid-template-columns 106px minmax(0, 1fr)
+  gap var(--spacing-md)
+  padding var(--spacing-lg) 0
+  border-bottom 1px solid var(--color-border)
+  scroll-margin-top 5rem
+  &:first-child
+    padding-top 0
+
+.novel-book-cover
+  position relative
+  display block
+  width 100%
+  aspect-ratio 3 / 4
+  align-self start
+  padding 0
+  overflow hidden
+  font inherit
+  background var(--color-bg-secondary)
+  border 1px solid var(--color-border)
+  border-radius 4px 8px 8px 4px
+  box-shadow inset 6px 0 0 rgba(0, 0, 0, 0.06), 3px 3px 0 var(--color-border)
+  transition transform var(--transition), box-shadow var(--transition)
+  &:is(button):hover,
+  &:focus-visible
+    transform translateY(-2px)
+    box-shadow inset 6px 0 0 rgba(0, 0, 0, 0.06), 5px 5px 0 var(--color-border)
+  &:is(button)
+    cursor pointer
+  &:focus-visible
+    outline 2px solid var(--color-accent)
+    outline-offset 3px
+  img
+    width 100%
+    height 100%
+    object-fit cover
+    display block
+  .novel-book-spine
+    display none
+  &.missing-cover
+    img
+      display none
+    .novel-book-spine
+      display block
+      position absolute
+      inset 0
+      width fit-content
+      height fit-content
+      max-height 90%
+      margin auto
+      writing-mode vertical-rl
+      letter-spacing 0.2em
+      color var(--color-text-secondary)
+      font-family var(--font-display)
+      font-size var(--font-size-sm)
+      overflow hidden
+
+.novel-book-text
+  font-size var(--font-size-sm)
+  line-height 1.75
+  overflow-wrap anywhere
+  h2
+    margin 0
+    font-size 1rem
+    font-weight 600
+    line-height 1.5
+    button
+      padding 0
+      color var(--color-text)
+      background none
+      border 0
+      font inherit
+      text-align left
+      cursor pointer
+      &:hover
+        color var(--color-link)
+  p
+    margin 0.25rem 0 0
+  .work-meta
+    font-size var(--font-size-xs)
+    color var(--color-text-muted)
+    margin-bottom 0.3rem
+
+.novel-open
+  display inline-flex
+  align-items center
+  gap 0.4rem
+  margin-top var(--spacing-md)
+  padding 0.35rem 0.8rem
+  color var(--color-text)
+  background var(--color-bg-secondary)
+  border 1px solid var(--color-border)
+  border-radius var(--border-radius)
+  font inherit
+  font-size var(--font-size-sm)
+  cursor pointer
+  transition border-color var(--transition), color var(--transition)
+  svg
+    color var(--color-text-muted)
+  &:hover
+    color var(--color-link)
+    border-color var(--color-link)
+  &:focus-visible
+    outline 2px solid var(--color-accent)
+    outline-offset 2px
+
+.novel-part-list
+  margin 0
+  padding 0
+  list-style none
+  li
+    border-top 1px solid var(--color-border)
+  button
+    display flex
+    align-items center
+    gap var(--spacing-sm)
+    width 100%
+    padding var(--spacing-sm) 0
+    color var(--color-text)
+    background none
+    border 0
+    font inherit
+    text-align left
+    cursor pointer
+    svg
+      flex none
+      color var(--color-text-muted)
+    &:hover .novel-part-name
+      color var(--color-link)
+    &:focus-visible
+      outline 2px solid var(--color-accent)
+      outline-offset 2px
+  .novel-part-text
+    flex 1
+    min-width 0
+  .novel-part-name
+    display block
+  .novel-part-synopsis
+    display block
+    color var(--color-text-muted)
+    font-size var(--font-size-xs)
+    overflow hidden
+    text-overflow ellipsis
+    white-space nowrap
+  .novel-part-count
+    flex none
+    color var(--color-text-muted)
+    font-size var(--font-size-xs)
+
+.novel-back
+  margin 0 0 var(--spacing-sm)
+  padding 0
+  color var(--color-text-secondary)
+  background none
+  border 0
+  font inherit
+  font-size var(--font-size-sm)
+  cursor pointer
+  &:hover
+    color var(--color-link)
+
+.novel-part-title
+  margin 0 0 var(--spacing-sm)
+  font-size 1rem
+  font-weight 600
+
+.novel-view[hidden]
+  display none
+
+.novel-status-serial
+  color var(--color-link)
+
+.novel-folder
+  width calc(100% - 2rem)
+  max-width 560px
+  max-height calc(100dvh - 2rem)
+  margin auto
+  padding var(--spacing-lg)
+  overflow auto
+  color var(--color-text)
+  background var(--color-bg)
+  border 1px solid var(--color-border)
+  border-radius var(--border-radius)
+  &::backdrop
+    background var(--color-overlay)
+    backdrop-filter blur(4px)
+  .work-synopsis
+    margin 0 0 var(--spacing-md)
+    color var(--color-text-secondary)
+    font-size var(--font-size-sm)
+
+.novel-folder-head
+  display flex
+  align-items center
+  justify-content space-between
+  gap var(--spacing-md)
+  margin-bottom var(--spacing-md)
+  h3
+    margin 0
+    font-size var(--font-size-lg)
+    font-family var(--font-display)
+  button
+    flex none
+    padding var(--spacing-xs) var(--spacing-sm)
+    color var(--color-text)
+    background var(--color-bg-secondary)
+    border 1px solid var(--color-border)
+    border-radius var(--border-radius)
+    font inherit
+    font-size var(--font-size-sm)
+    cursor pointer
+
+.novel-chapters
+  margin 0
+  padding 0
+  list-style none
+  counter-reset chapter
+  li
+    counter-increment chapter
+    border-top 1px solid var(--color-border)
+  a
+    display flex
+    align-items baseline
+    gap var(--spacing-sm)
+    padding var(--spacing-sm) 0
+    color var(--color-text)
+    text-decoration none
+    &::before
+      content counter(chapter, decimal-leading-zero)
+      flex none
+      color var(--color-text-muted)
+      font-size var(--font-size-xs)
+      font-variant-numeric tabular-nums
+    &:hover .novel-chapter-title
+      color var(--color-link)
+  .novel-chapter-title
+    flex 1
+    min-width 0
+  time
+    flex none
+    color var(--color-text-muted)
+    font-size var(--font-size-xs)
+
+.novel-crumb
+  margin 0 0 var(--spacing-xs)
+  text-align center
+  font-size var(--font-size-sm)
+  color var(--color-text-muted)
+  a
+    color var(--color-text-secondary)
+    text-decoration none
+    &:hover
+      color var(--color-link)
+  span
+    margin-left var(--spacing-sm)
+
+.novel-nav
+  grid-template-columns 1fr auto 1fr
+  .novel-nav-toc
+    text-align center
+    a
+      display block
+      padding var(--spacing-lg) var(--spacing-md)
+      color var(--color-text)
+      white-space nowrap
+      &:hover
+        color var(--color-accent)
+
+@media (max-width: 480px)
+  .novel-book
+    grid-template-columns 78px minmax(0, 1fr)
+    gap 0.75rem
+
+@media (max-width: 768px)
+  .post-nav.novel-nav
+    grid-template-columns 1fr 1fr
+    gap var(--spacing-md)
+    .novel-nav-toc
+      grid-column 1 / -1
+      grid-row 1
+      a
+        padding-bottom 0

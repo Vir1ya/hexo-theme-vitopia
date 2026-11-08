@@ -33,9 +33,12 @@ dark_mode: true
 code_copy: true
 
 # Work reviews, generated from posts with a `work` front matter object.
+# Posts with a `novel` front matter object become the author's own writings,
+# grouped into books at <path>/<novels_path>/ (only generated when any exist).
 reviews:
   enable: false
   path: reviews
+  novels_path: novels
 
 # Standalone gallery page at /gallery/.
 gallery:

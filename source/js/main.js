@@ -59,6 +59,79 @@
     if (image.complete && !image.naturalWidth) fallback();
   });
 
+  // ===============
+  // Writings: a book opens as a folder (dialog) listing its parts; a part
+  // opens inside the same dialog as its chapter list. Neither has a route of
+  // its own: the URL hash only remembers the open view, so chapter pages can
+  // link back to their part's contents.
+  // ===============
+  var novelFolders = Array.from(document.querySelectorAll('[data-novel-folder]'));
+  if (novelFolders.length && typeof novelFolders[0].showModal === 'function') {
+    var novelReturnFocus;
+    var novelPreviousOverflow;
+    var findView = function (id) {
+      return Array.from(document.querySelectorAll('[data-novel-view]')).find(function (view) { return view.dataset.novelView === id; });
+    };
+    var setHash = function (id) {
+      if (location.hash !== '#' + id) history.replaceState(null, '', '#' + id);
+    };
+    var showView = function (folder, id, focusTarget) {
+      var views = Array.from(folder.querySelectorAll('[data-novel-view]'));
+      var target = views.find(function (view) { return view.dataset.novelView === id; }) || views[0];
+      views.forEach(function (view) { view.hidden = view !== target; });
+      folder.scrollTop = 0;
+      setHash(target.dataset.novelView);
+      var focusable = focusTarget || target.querySelector('button, a');
+      if (focusable) focusable.focus({ preventScroll: true });
+    };
+    // `id` may name a book (its first view) or one of its parts.
+    var openFolder = function (id, trigger) {
+      var folder = novelFolders.find(function (item) { return item.dataset.novelFolder === id; });
+      var view = folder ? null : findView(id);
+      if (!folder && view) folder = view.closest('[data-novel-folder]');
+      if (!folder) return;
+      if (!folder.open) {
+        novelReturnFocus = trigger || document.querySelector('.novel-open[data-novel-open="' + folder.dataset.novelFolder + '"]');
+        novelPreviousOverflow = document.body.style.overflow;
+        folder.showModal();
+        document.body.style.overflow = 'hidden';
+      }
+      showView(folder, view ? id : null);
+    };
+    document.querySelectorAll('[data-novel-open]').forEach(function (button) {
+      button.addEventListener('click', function () { openFolder(button.dataset.novelOpen, button); });
+    });
+    novelFolders.forEach(function (folder) {
+      folder.querySelectorAll('[data-novel-part]').forEach(function (button) {
+        button.addEventListener('click', function () { showView(folder, button.dataset.novelPart); });
+      });
+      folder.querySelectorAll('[data-novel-back]').forEach(function (button) {
+        button.addEventListener('click', function () {
+          var partId = button.closest('[data-novel-view]').dataset.novelView;
+          showView(folder, button.dataset.novelBack, folder.querySelector('[data-novel-part="' + partId + '"]'));
+        });
+      });
+      folder.querySelector('[data-novel-close]').addEventListener('click', function () { folder.close(); });
+      folder.addEventListener('click', function (event) { if (event.target === folder) folder.close(); });
+      folder.addEventListener('close', function () {
+        document.body.style.overflow = novelPreviousOverflow;
+        history.replaceState(null, '', location.pathname + location.search);
+        if (novelReturnFocus) novelReturnFocus.focus({ preventScroll: true });
+      });
+    });
+    var openFromHash = function () {
+      var id = decodeURIComponent(location.hash.slice(1));
+      if (id) openFolder(id);
+    };
+    openFromHash();
+    window.addEventListener('hashchange', openFromHash);
+  }
+  document.querySelectorAll('.novel-book-cover img').forEach(function (image) {
+    var fallback = function () { image.parentElement.classList.add('missing-cover'); };
+    image.addEventListener('error', fallback);
+    if (image.complete && !image.naturalWidth) fallback();
+  });
+
   // Gallery tags are read as data rather than interpolated into selectors.
   var galleryItems = Array.from(document.querySelectorAll('.gallery-item')).map(function (item) {
     return { element: item, tags: JSON.parse(item.dataset.galleryTags || '[]') };

@@ -1,6 +1,11 @@
 <%- partial('_partial/article', {post: page, index: false}) %>
 
-<%- partial('_partial/post/nav', {post: page}) %>
+<% var novelCtx = novel_context(page); %>
+<% if (novelCtx) { %>
+  <%- partial('_partial/post/novel-nav', {ctx: novelCtx}) %>
+<% } else { %>
+  <%- partial('_partial/post/nav', {post: page}) %>
+<% } %>
 
 <script>
 (function() {

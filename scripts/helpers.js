@@ -10,7 +10,8 @@ hexo.extend.generator.register('search-json', function (locals) {
   var posts = locals.posts.sort('-date');
   var result = posts.map(function (post) {
     var work = post.work && typeof post.work === 'object' ? post.work : {};
-    var workText = [work.title, work.meta, work.synopsis, work.review].filter(function (value) { return typeof value === 'string'; }).join(' ');
+    var novel = post.novel && typeof post.novel === 'object' ? post.novel : {};
+    var workText = [work.title, work.meta, work.synopsis, work.review, novel.book, novel.synopsis].filter(function (value) { return typeof value === 'string'; }).join(' ');
     return {
       title: post.title || '',
       date: post.date ? post.date.format('YYYY-MM-DD') : '',
